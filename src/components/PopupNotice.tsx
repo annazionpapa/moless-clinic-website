@@ -18,7 +18,6 @@ export default function PopupNotice() {
   }, []);
 
   const close = () => setVisible(false);
-
   const dismissToday = () => {
     localStorage.setItem(STORAGE_KEY, String(Date.now()));
     setVisible(false);
@@ -27,150 +26,115 @@ export default function PopupNotice() {
   if (!visible) return null;
 
   return (
-    <div
-      className="fixed inset-0 flex items-center justify-center"
-      style={{ zIndex: 9999 }}
-    >
-      {/* 어두운 오버레이 */}
+    <div className="fixed inset-0 flex items-center justify-center" style={{ zIndex: 9999 }}>
       <div className="absolute inset-0 bg-black/40" onClick={close} />
 
-      {/* 팝업 - 화면의 대부분을 차지하도록 크게 */}
-      <div
-        className="relative w-[90vw] max-w-[620px]"
-        role="dialog"
-        aria-modal="true"
-        aria-label="공지사항 팝업"
-      >
-        {/* ── 스프링 바인딩 (본사처럼 큰 고리) ── */}
-        <div className="relative flex justify-between px-[10%] -mb-3" style={{ zIndex: 3 }}>
-          {Array.from({ length: 8 }).map((_, i) => (
-            <div key={i} className="flex flex-col items-center">
-              {/* 고리 - 위쪽 반원 */}
-              <div
-                className="w-[22px] h-[22px] rounded-full border-[3.5px] border-[#1a1a1a]"
-                style={{
-                  backgroundColor: "transparent",
-                  boxShadow: "0 2px 3px rgba(0,0,0,0.1)",
-                }}
-              />
-              {/* 고리 아래 수직선 */}
-              <div className="w-[3.5px] h-[14px] bg-[#1a1a1a] -mt-[3px]" />
-            </div>
+      <div className="relative w-[92vw] max-w-[700px]" role="dialog" aria-modal="true">
+        {/* 스프링 바인딩 - 본사처럼 곡선 고리 */}
+        <svg
+          viewBox="0 0 700 50"
+          className="relative w-full -mb-[6px]"
+          style={{ zIndex: 3 }}
+          preserveAspectRatio="xMidYMax meet"
+        >
+          {[95, 170, 245, 320, 395, 470, 545, 620].map((x, i) => (
+            <g key={i}>
+              <ellipse cx={x} cy="18" rx="14" ry="16" fill="none" stroke="#222" strokeWidth="4.5" />
+              <line x1={x} y1="34" x2={x} y2="50" stroke="#222" strokeWidth="4.5" />
+            </g>
           ))}
-        </div>
+        </svg>
 
-        {/* ── 노트 본체 (두꺼운 손그림 테두리) ── */}
+        {/* 노트 본체 - 두꺼운 손그림 테두리 */}
         <div
-          className="relative bg-[#fafaf7] overflow-hidden"
           style={{
-            border: "4px solid #1a1a1a",
-            borderRadius: "12px 12px 6px 6px",
-            boxShadow: "6px 8px 30px rgba(0,0,0,0.3)",
+            background: "#fafaf7",
+            border: "5px solid #222",
+            borderRadius: "18px",
+            boxShadow: "5px 8px 25px rgba(0,0,0,0.3)",
+            position: "relative",
+            zIndex: 2,
           }}
         >
-          {/* 메인 콘텐츠 - 넉넉한 패딩 */}
-          <div className="px-10 pt-12 pb-10 text-center sm:px-16 sm:pt-16 sm:pb-12">
-            {/* 메가폰 + GRAND OPEN */}
-            <div className="flex items-center justify-center gap-4 mb-5">
-              <span className="text-[3rem] sm:text-[4rem] leading-none">📢</span>
-              <h2 className="text-[2.5rem] sm:text-[3.2rem] font-black tracking-tight leading-none">
+          <div className="px-10 pt-14 pb-10 text-center sm:px-16 sm:pt-16 sm:pb-14">
+            {/* 메가폰 + 제목 */}
+            <div className="flex items-center justify-center gap-4 mb-4">
+              <span className="text-[3.5rem] sm:text-[4.5rem] leading-none">📢</span>
+              <h2 className="text-[2.8rem] sm:text-[3.5rem] font-black tracking-tight leading-none">
                 GRAND OPEN
               </h2>
             </div>
 
-            {/* 점선 구분 (본사 스타일) */}
+            {/* 점선 */}
             <div
               className="mx-auto my-6 sm:my-8"
               style={{
-                width: "85%",
-                height: "2px",
+                width: "90%",
+                height: "3px",
                 backgroundImage:
-                  "repeating-linear-gradient(to right, #888 0px, #888 8px, transparent 8px, transparent 14px)",
+                  "repeating-linear-gradient(to right, #777 0px, #777 10px, transparent 10px, transparent 16px)",
               }}
             />
 
-            {/* 장비 정보 - 본사 크기 */}
-            <p className="text-[1.15rem] sm:text-[1.35rem] leading-relaxed mb-1">
-              젠틀맥스프로플러스{" "}
-              <span className="font-bold underline underline-offset-4 decoration-2">정품</span>{" "}
-              장비 보유
+            {/* 설명 텍스트 */}
+            <p className="text-[1.25rem] sm:text-[1.5rem] leading-relaxed mb-1 tracking-tight">
+              젠틀맥스프로플러스 <span className="font-bold underline underline-offset-4 decoration-2">정품</span> 장비 보유
             </p>
-            <p className="text-[1.15rem] sm:text-[1.35rem] leading-relaxed mb-10">
+            <p className="text-[1.25rem] sm:text-[1.5rem] leading-relaxed mb-10 tracking-tight">
               남/여 제모공간 분리 !
             </p>
 
-            {/* 층별 안내 - 본사 크기와 레이아웃 */}
-            <div className="flex flex-col gap-6 items-center mb-8">
+            {/* 층별 안내 */}
+            <div className="flex flex-col gap-8 items-center mb-10">
               {/* 11층 여성 */}
-              <div className="flex items-center gap-6">
-                <span className="text-[1.6rem] sm:text-[1.9rem] font-bold min-w-[4rem] text-right">
-                  11층
-                </span>
-                {/* 여성 아이콘 (핑크) */}
-                <svg
-                  width="40"
-                  height="60"
-                  viewBox="0 0 40 60"
-                  fill="none"
-                  className="flex-shrink-0"
-                >
-                  <circle cx="20" cy="9" r="8" fill="#E91E8C" />
-                  <path d="M20 20 L20 42" stroke="#E91E8C" strokeWidth="4" strokeLinecap="round" />
-                  <path d="M10 28 L30 28" stroke="#E91E8C" strokeWidth="4" strokeLinecap="round" />
-                  <path d="M20 42 L10 58" stroke="#E91E8C" strokeWidth="4" strokeLinecap="round" />
-                  <path d="M20 42 L30 58" stroke="#E91E8C" strokeWidth="4" strokeLinecap="round" />
-                  {/* 치마 */}
-                  <path d="M11 28 L29 28 L26 38 L14 38 Z" fill="#E91E8C" />
+              <div className="flex items-center gap-8">
+                <span className="text-[1.8rem] sm:text-[2.2rem] font-bold min-w-[4.5rem] text-right">11층</span>
+                <svg width="44" height="72" viewBox="0 0 44 72" className="flex-shrink-0">
+                  <circle cx="22" cy="10" r="9" fill="#E91E8C" />
+                  <line x1="22" y1="22" x2="22" y2="48" stroke="#E91E8C" strokeWidth="5" strokeLinecap="round" />
+                  <line x1="10" y1="32" x2="34" y2="32" stroke="#E91E8C" strokeWidth="5" strokeLinecap="round" />
+                  <polygon points="12,32 32,32 28,46 16,46" fill="#E91E8C" />
+                  <line x1="22" y1="48" x2="10" y2="68" stroke="#E91E8C" strokeWidth="5" strokeLinecap="round" />
+                  <line x1="22" y1="48" x2="34" y2="68" stroke="#E91E8C" strokeWidth="5" strokeLinecap="round" />
                 </svg>
-                <span className="text-[1.3rem] sm:text-[1.6rem] font-bold">
-                  여성제모 &amp; 상담
-                </span>
+                <span className="text-[1.5rem] sm:text-[1.9rem] font-bold">여성제모 &amp; 상담</span>
               </div>
 
               {/* 9층 남성 */}
-              <div className="flex items-center gap-6">
-                <span className="text-[1.6rem] sm:text-[1.9rem] font-bold min-w-[4rem] text-right">
-                  9층
-                </span>
-                {/* 남성 아이콘 (파랑) */}
-                <svg
-                  width="40"
-                  height="60"
-                  viewBox="0 0 40 60"
-                  fill="none"
-                  className="flex-shrink-0"
-                >
-                  <circle cx="20" cy="9" r="8" fill="#2196F3" />
-                  <path d="M20 20 L20 42" stroke="#2196F3" strokeWidth="4" strokeLinecap="round" />
-                  <path d="M10 28 L30 28" stroke="#2196F3" strokeWidth="4" strokeLinecap="round" />
-                  <path d="M20 42 L10 58" stroke="#2196F3" strokeWidth="4" strokeLinecap="round" />
-                  <path d="M20 42 L30 58" stroke="#2196F3" strokeWidth="4" strokeLinecap="round" />
+              <div className="flex items-center gap-8">
+                <span className="text-[1.8rem] sm:text-[2.2rem] font-bold min-w-[4.5rem] text-right">9층</span>
+                <svg width="44" height="72" viewBox="0 0 44 72" className="flex-shrink-0">
+                  <circle cx="22" cy="10" r="9" fill="#2196F3" />
+                  <line x1="22" y1="22" x2="22" y2="48" stroke="#2196F3" strokeWidth="5" strokeLinecap="round" />
+                  <line x1="10" y1="32" x2="34" y2="32" stroke="#2196F3" strokeWidth="5" strokeLinecap="round" />
+                  <line x1="22" y1="48" x2="10" y2="68" stroke="#2196F3" strokeWidth="5" strokeLinecap="round" />
+                  <line x1="22" y1="48" x2="34" y2="68" stroke="#2196F3" strokeWidth="5" strokeLinecap="round" />
                 </svg>
-                <span className="text-[1.3rem] sm:text-[1.6rem] font-bold">남성제모</span>
+                <span className="text-[1.5rem] sm:text-[1.9rem] font-bold">남성제모</span>
               </div>
             </div>
+
+            {/* 여백 */}
+            <div className="h-6 sm:h-10" />
           </div>
 
-          {/* ── @molessclinic (본사 스타일: 양쪽 라인) ── */}
-          <div className="flex items-center justify-center gap-4 pb-10 px-10 sm:px-16">
-            <div className="flex-1 h-px bg-[#222]" />
+          {/* @molessclinic */}
+          <div className="flex items-center gap-4 px-10 pb-10 sm:px-16">
+            <div className="flex-1 h-[2px] bg-[#222]" />
             <a
               href="https://www.instagram.com/molessclinic/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[15px] text-[#333] hover:text-black transition-colors whitespace-nowrap"
+              className="text-[15px] sm:text-[17px] text-[#333] hover:text-black transition-colors whitespace-nowrap"
             >
               @molessclinic
             </a>
-            <div className="flex-1 h-px bg-[#222]" />
+            <div className="flex-1 h-[2px] bg-[#222]" />
           </div>
         </div>
 
-        {/* ── 하단 검은 바 ── */}
-        <div
-          className="flex items-center justify-between px-5 py-3.5"
-          style={{ backgroundColor: "#111" }}
-        >
+        {/* 하단 검은 바 */}
+        <div className="flex items-center justify-between bg-[#111] px-5 py-3.5">
           <button
             onClick={dismissToday}
             className="text-[13px] text-gray-400 hover:text-white transition-colors cursor-pointer underline underline-offset-2"
