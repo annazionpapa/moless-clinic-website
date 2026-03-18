@@ -239,23 +239,24 @@ export default function HomePage() {
             제모를 위한 공간, 모리스의원 강남
           </h2>
 
-          {/* 걸어가는 사람 — 글자 중간에 걸쳐서 배치 (원본처럼) */}
+          {/* 걸어가는 사람 — 글자 아래로 걸쳐서 배치 (원본처럼: 머리=글자높이, 다리=글자 아래) */}
           <div
             className="absolute fade-up"
             data-scroll-animate
             style={{
               top: "50%",
               left: "50%",
-              transform: "translate(-50%, -25%)",
-              width: "clamp(70px, 8vw, 110px)",
-              height: "clamp(110px, 13vw, 170px)",
+              transform: "translate(-50%, -12%)",
+              width: "clamp(65px, 7vw, 100px)",
+              height: "clamp(120px, 14vw, 180px)",
               zIndex: 5,
               overflow: "hidden",
               mixBlendMode: "multiply",
+              opacity: 0.45,
             }}
           >
             {/* 이미지를 크게 확대해서 사람 부분만 보이도록 */}
-            <div style={{ position: "absolute", width: "900%", height: "900%", top: "-570%", left: "-400%" }}>
+            <div style={{ position: "absolute", width: "900%", height: "900%", top: "-570%", left: "-400%", filter: "contrast(10) brightness(1.8)" }}>
               <Image
                 src="/images/original/walking-person.jpg"
                 alt=""
