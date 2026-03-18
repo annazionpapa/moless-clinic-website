@@ -343,3 +343,12 @@ img, video {
 .animate-scroll-left {
   animation: scroll-left 20s linear infinite;
 }
+
+/* ─── 스크롤바 숨김 ─── */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}

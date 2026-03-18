@@ -31,7 +31,7 @@ export default function PopupNotice() {
 
       {/* 노트패드 — 본사 크기 매칭, 살짝 기울어짐 */}
       <div
-        className="relative w-[94vw] max-w-[680px]"
+        className="relative w-[94vw] max-w-[780px]"
         role="dialog"
         aria-modal="true"
         style={{ transform: "rotate(-1.5deg)" }}
@@ -70,14 +70,14 @@ export default function PopupNotice() {
           {/* 크림색 콘텐츠 — 넉넉한 내부 여백 */}
           <div
             style={{ backgroundColor: "#fafaf7" }}
-            className="px-10 pt-14 pb-10 sm:px-16 sm:pt-16 sm:pb-12 text-center"
+            className="px-12 pt-16 pb-12 sm:px-20 sm:pt-20 sm:pb-14 text-center"
           >
             {/* 메가폰 + 확장완료 */}
             <div className="flex items-center justify-center gap-4 mb-8 sm:mb-10">
-              <span className="text-[3rem] sm:text-[4rem] leading-none">📢</span>
+              <span className="text-[3.5rem] sm:text-[5rem] leading-none">📢</span>
               <h2
                 className="font-black tracking-tight leading-none"
-                style={{ fontSize: "clamp(2.2rem, 6vw, 3.5rem)" }}
+                style={{ fontSize: "clamp(2.8rem, 7vw, 4.5rem)" }}
               >
                 확장완료
               </h2>
@@ -96,27 +96,27 @@ export default function PopupNotice() {
             />
 
             {/* 설명 — 점선과 충분히 떨어짐 */}
-            <p style={{ fontSize: "clamp(1rem, 2.5vw, 1.3rem)", lineHeight: 1.8, marginBottom: "4px" }}>
+            <p style={{ fontSize: "clamp(1.1rem, 2.8vw, 1.5rem)", lineHeight: 1.8, marginBottom: "4px" }}>
               젠틀맥스프로플러스{" "}
               <span className="font-bold underline underline-offset-4 decoration-2">4대</span>
               , 아포지엘리트플러스{" "}
               <span className="font-bold underline underline-offset-4 decoration-2">2대</span>
             </p>
-            <p style={{ fontSize: "clamp(1rem, 2.5vw, 1.3rem)", lineHeight: 1.8, marginBottom: "clamp(2rem, 4vw, 3.5rem)" }}>
+            <p style={{ fontSize: "clamp(1.1rem, 2.8vw, 1.5rem)", lineHeight: 1.8, marginBottom: "clamp(2rem, 4vw, 3.5rem)" }}>
               남/여 제모공간 분리 !
             </p>
 
             {/* 층별 안내 — 넉넉한 간격 */}
-            <div className="flex flex-col gap-8 sm:gap-10 items-center mb-10 sm:mb-14">
+            <div className="flex flex-col gap-10 sm:gap-14 items-center mb-10 sm:mb-14">
               {/* 11층 여성 */}
               <div className="flex items-center gap-6 sm:gap-8">
                 <span
                   className="font-bold min-w-[3.5rem] text-right"
-                  style={{ fontSize: "clamp(1.5rem, 3.5vw, 2rem)" }}
+                  style={{ fontSize: "clamp(1.8rem, 4vw, 2.5rem)" }}
                 >
                   11층
                 </span>
-                <svg width="36" height="62" viewBox="0 0 48 80" className="flex-shrink-0">
+                <svg width="44" height="74" viewBox="0 0 48 80" className="flex-shrink-0">
                   <circle cx="24" cy="10" r="10" fill="#E91E8C" />
                   <line x1="24" y1="24" x2="24" y2="52" stroke="#E91E8C" strokeWidth="5.5" strokeLinecap="round" />
                   <line x1="10" y1="35" x2="38" y2="35" stroke="#E91E8C" strokeWidth="5.5" strokeLinecap="round" />
@@ -124,7 +124,7 @@ export default function PopupNotice() {
                   <line x1="24" y1="52" x2="10" y2="75" stroke="#E91E8C" strokeWidth="5.5" strokeLinecap="round" />
                   <line x1="24" y1="52" x2="38" y2="75" stroke="#E91E8C" strokeWidth="5.5" strokeLinecap="round" />
                 </svg>
-                <span className="font-bold" style={{ fontSize: "clamp(1.2rem, 3vw, 1.6rem)" }}>
+                <span className="font-bold" style={{ fontSize: "clamp(1.4rem, 3.5vw, 1.9rem)" }}>
                   여성제모 &amp; 상담
                 </span>
               </div>
@@ -133,18 +133,18 @@ export default function PopupNotice() {
               <div className="flex items-center gap-6 sm:gap-8">
                 <span
                   className="font-bold min-w-[3.5rem] text-right"
-                  style={{ fontSize: "clamp(1.5rem, 3.5vw, 2rem)" }}
+                  style={{ fontSize: "clamp(1.8rem, 4vw, 2.5rem)" }}
                 >
                   9층
                 </span>
-                <svg width="36" height="62" viewBox="0 0 48 80" className="flex-shrink-0">
+                <svg width="44" height="74" viewBox="0 0 48 80" className="flex-shrink-0">
                   <circle cx="24" cy="10" r="10" fill="#2196F3" />
                   <line x1="24" y1="24" x2="24" y2="52" stroke="#2196F3" strokeWidth="5.5" strokeLinecap="round" />
                   <line x1="10" y1="35" x2="38" y2="35" stroke="#2196F3" strokeWidth="5.5" strokeLinecap="round" />
                   <line x1="24" y1="52" x2="10" y2="75" stroke="#2196F3" strokeWidth="5.5" strokeLinecap="round" />
                   <line x1="24" y1="52" x2="38" y2="75" stroke="#2196F3" strokeWidth="5.5" strokeLinecap="round" />
                 </svg>
-                <span className="font-bold" style={{ fontSize: "clamp(1.2rem, 3vw, 1.6rem)" }}>
+                <span className="font-bold" style={{ fontSize: "clamp(1.4rem, 3.5vw, 1.9rem)" }}>
                   남성제모
                 </span>
               </div>
@@ -172,7 +172,7 @@ export default function PopupNotice() {
           >
             <button
               onClick={dismissToday}
-              className="text-[12px] sm:text-[13px] text-gray-400 hover:text-white transition-colors cursor-pointer underline underline-offset-2"
+              className="text-[13px] sm:text-[14px] text-gray-400 hover:text-white transition-colors cursor-pointer underline underline-offset-2"
             >
               오늘 하루 보지 않음
             </button>

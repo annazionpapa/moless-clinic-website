@@ -38,6 +38,7 @@ const NAV_ITEMS = [
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [openSubMenu, setOpenSubMenu] = useState<string | null>(null);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 30);
@@ -51,6 +52,25 @@ export default function Header() {
     return () => document.body.classList.remove("menu-open");
   }, [isMenuOpen]);
 
+  // Push main content and footer to the left when menu opens
+  useEffect(() => {
+    const main = document.querySelector("main") as HTMLElement | null;
+    const footer = document.querySelector("footer") as HTMLElement | null;
+    const targets = [main, footer].filter(Boolean) as HTMLElement[];
+
+    targets.forEach((el) => {
+      el.style.transition = "transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)";
+      el.style.transform = isMenuOpen ? "translateX(-180px) scale(0.94)" : "";
+    });
+
+    return () => {
+      targets.forEach((el) => {
+        el.style.transition = "";
+        el.style.transform = "";
+      });
+    };
+  }, [isMenuOpen]);
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") setIsMenuOpen(false);
@@ -59,8 +79,26 @@ export default function Header() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
-  const toggleMenu = () => setIsMenuOpen((prev) => !prev);
-  const closeMenu = () => setIsMenuOpen(false);
+  const toggleMenu = () => {
+    setIsMenuOpen((prev) => {
+      if (prev) setOpenSubMenu(null); // reset sub-menus on close
+      return !prev;
+    });
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+    setOpenSubMenu(null);
+  };
+
+  const handleNavClick = (item: (typeof NAV_ITEMS)[number]) => {
+    if ("sub" in item && item.sub) {
+      // Toggle sub-menu instead of navigating
+      setOpenSubMenu((prev) => (prev === item.label ? null : item.label));
+    } else {
+      closeMenu();
+    }
+  };
 
   return (
     <>
@@ -121,7 +159,7 @@ export default function Header() {
         </button>
       </header>
 
-      {/* ═══ 사이드 메뉴 패널 — 본사: 우측에서 슬라이드 ═══ */}
+      {/* ═══ 사이드 메뉴 패널 — 우측에서 슬라이드, 본문 좌측으로 밀림 ═══ */}
       {/* 배경 딤 */}
       <div
         className={`fixed inset-0 z-[55] transition-opacity ${
@@ -138,7 +176,7 @@ export default function Header() {
       <nav
         className="fixed top-0 right-0 h-full z-[58] flex flex-col justify-center transition-transform"
         style={{
-          width: "min(420px, 85vw)",
+          width: "min(500px, 85vw)",
           backgroundColor: "#000",
           transform: isMenuOpen ? "translateX(0)" : "translateX(100%)",
           transitionDuration: "var(--duration-slow)",
@@ -148,59 +186,99 @@ export default function Header() {
         aria-label="전체 메뉴"
         aria-hidden={!isMenuOpen}
       >
-        {/* X 닫기 — 우상단 */}
-        <button
-          onClick={closeMenu}
-          className="absolute top-6 right-6 hover:opacity-100 transition-opacity w-10 h-10 flex items-center justify-center cursor-pointer"
-          style={{ fontSize: "24px", color: "rgba(255,255,255,0.6)", transitionDuration: "var(--duration-fast)" }}
-          aria-label="메뉴 닫기"
-        >
-          ✕
-        </button>
-
         {/* 네비게이션 항목 */}
-        <ul className="space-y-2">
-          {NAV_ITEMS.map((item, index) => (
-            <li
-              key={item.href}
-            >
-              <Link
-                href={item.href}
-                onClick={closeMenu}
-                className="block hover:opacity-70 transition-opacity py-2"
-                style={{
-                  fontFamily: "var(--font-subpage)",
-                  fontWeight: 600,
-                  fontSize: "clamp(1.3rem, 3vw, 1.6rem)",
-                  letterSpacing: "-0.01em",
-                  color: "#ffffff",
-                  transitionDuration: "var(--duration-fast)",
-                }}
-              >
-                {item.label}
-              </Link>
-              {"sub" in item && item.sub && (
-                <div className="ml-1 mt-1 mb-3 flex flex-col gap-1.5">
-                  {item.sub.map((sub) => (
-                    <Link
-                      key={sub.href}
-                      href={sub.href}
-                      onClick={closeMenu}
-                      className="hover:opacity-80 transition-opacity"
+        <ul style={{ display: "flex", flexDirection: "column", gap: "1rem", listStyle: "none", margin: 0, padding: 0 }}>
+          {NAV_ITEMS.map((item) => {
+            const hasSub = "sub" in item && item.sub;
+            const isSubOpen = openSubMenu === item.label;
+
+            return (
+              <li key={item.href}>
+                {hasSub ? (
+                  <button
+                    onClick={() => handleNavClick(item)}
+                    className="cursor-pointer"
+                    style={{
+                      width: "100%",
+                      textAlign: "left",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      padding: "8px 0",
+                      fontFamily: "var(--font-subpage)",
+                      fontWeight: 600,
+                      fontSize: "clamp(1.8rem, 4vw, 2.4rem)",
+                      letterSpacing: "-0.01em",
+                      color: "#ffffff",
+                      background: "none",
+                      border: "none",
+                    }}
+                  >
+                    {item.label}
+                    <span
                       style={{
-                        fontSize: "14px",
-                        fontFamily: "var(--font-body)",
-                        color: "rgba(255,255,255,0.35)",
-                        transitionDuration: "var(--duration-fast)",
+                        display: "inline-block",
+                        width: "8px",
+                        height: "8px",
+                        borderRight: "1.5px solid rgba(255,255,255,0.4)",
+                        borderBottom: "1.5px solid rgba(255,255,255,0.4)",
+                        transition: "transform 0.3s ease",
+                        transform: isSubOpen ? "rotate(-135deg)" : "rotate(45deg)",
+                        marginLeft: "0.8rem",
+                        marginBottom: isSubOpen ? "-2px" : "4px",
                       }}
-                    >
-                      {sub.label}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </li>
-          ))}
+                    />
+                  </button>
+                ) : (
+                  <Link
+                    href={item.href}
+                    onClick={closeMenu}
+                    style={{
+                      display: "block",
+                      padding: "8px 0",
+                      fontFamily: "var(--font-subpage)",
+                      fontWeight: 600,
+                      fontSize: "clamp(1.8rem, 4vw, 2.4rem)",
+                      letterSpacing: "-0.01em",
+                      color: "#ffffff",
+                    }}
+                  >
+                    {item.label}
+                  </Link>
+                )}
+
+                {/* Sub-menu: hidden by default, expand on click */}
+                {hasSub && (
+                  <div
+                    style={{
+                      maxHeight: isSubOpen ? "300px" : "0",
+                      opacity: isSubOpen ? 1 : 0,
+                      overflow: "hidden",
+                      transition: "max-height 0.4s ease, opacity 0.3s ease",
+                      paddingLeft: "1.5rem",
+                    }}
+                  >
+                    <div style={{ display: "flex", flexDirection: "column", gap: "2px", paddingBottom: "6px", paddingTop: "6px" }}>
+                      {item.sub!.map((sub) => (
+                        <Link
+                          key={sub.href}
+                          href={sub.href}
+                          onClick={closeMenu}
+                          style={{
+                            fontSize: "16px",
+                            fontFamily: "var(--font-body)",
+                            color: "rgba(255,255,255,0.5)",
+                          }}
+                        >
+                          {sub.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </li>
+            );
+          })}
         </ul>
       </nav>
 

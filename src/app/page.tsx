@@ -55,7 +55,7 @@ const FOR_YOU = [
     wide: true,
   },
   {
-    img: "/images/original/nate-beach.jpg",
+    img: "/images/original/night-sky.jpg",
     title: "평일 야간 / 주말 진료",
     desc: "평일 11:00 – 21:00\n주말 10:00 – 17:30",
     wide: false,
@@ -85,6 +85,8 @@ const INTERIOR = [
   "/images/original/clinic-interior-1.jpg",
   "/images/original/clinic-interior-2.jpg",
   "/images/original/clinic-interior-3.jpg",
+  "/images/original/clinic-interior-1.jpg",
+  "/images/original/clinic-interior-2.jpg",
 ];
 
 /* ═══════════════════════════════════════════════════
@@ -152,7 +154,7 @@ export default function HomePage() {
           <h1
             style={{
               fontFamily: "var(--font-italic)",
-              fontSize: "clamp(2.6rem, 7.5vw, 6rem)",
+              fontSize: "clamp(3.5rem, 9vw, 7.5rem)",
               fontWeight: 400,
               letterSpacing: "0.06em",
               color: "var(--color-black)",
@@ -165,10 +167,10 @@ export default function HomePage() {
           <p
             style={{
               fontFamily: "var(--font-body)",
-              fontSize: "clamp(0.7rem, 1.2vw, 0.9rem)",
-              fontWeight: 300,
+              fontSize: "clamp(0.85rem, 1.5vw, 1.1rem)",
+              fontWeight: 400,
               letterSpacing: "0.3em",
-              color: "rgba(0,0,0,0.45)",
+              color: "rgba(0,0,0,0.55)",
               marginBottom: "3.5rem",
             }}
           >
@@ -185,15 +187,15 @@ export default function HomePage() {
                 href={btn.href}
                 className="group flex items-center gap-3 justify-center transition-all hover:bg-black/5"
                 style={{
-                  padding: "14px 40px",
+                  padding: "16px 48px",
                   borderRadius: "200px",
                   border: "1px solid rgba(0,0,0,0.2)",
                   fontFamily: "var(--font-label)",
-                  fontSize: "12px",
+                  fontSize: "14px",
                   fontWeight: 500,
                   letterSpacing: "0.14em",
                   color: "var(--color-black)",
-                  minWidth: "270px",
+                  minWidth: "310px",
                   transitionDuration: "var(--duration-normal)",
                 }}
               >
@@ -220,14 +222,14 @@ export default function HomePage() {
           INTRO — 걸어가는 사람 + 설명 + 카운터
       ───────────────────────────────────────────── */}
       <section className="relative bg-white overflow-hidden">
-        {/* 타이틀 + 걸어가는 사람 (겹침 레이아웃 — 원본 매칭) */}
-        <div className="relative text-center" style={{ paddingTop: "clamp(8rem, 16vh, 14rem)", paddingBottom: "clamp(6rem, 14vh, 12rem)" }}>
+        {/* 타이틀 + 걸어가는 사람 (겹침 레이아웃) */}
+        <div className="relative text-center" style={{ paddingTop: "clamp(8rem, 16vh, 14rem)", paddingBottom: "clamp(8rem, 16vh, 14rem)" }}>
           <h2
             className="fade-up relative z-10"
             data-scroll-animate
             style={{
               fontFamily: "var(--font-body)",
-              fontSize: "clamp(1.4rem, 2.6vw, 2rem)",
+              fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)",
               fontWeight: 700,
               letterSpacing: "-0.02em",
               color: "var(--color-black)",
@@ -237,10 +239,29 @@ export default function HomePage() {
             제모를 위한 공간, 모리스의원 강남
           </h2>
 
-          {/* 걸어가는 사람 — 타이틀 아래, 작고 섬세하게 */}
-          <div className="flex justify-center fade-up" data-scroll-animate style={{ marginTop: "0.5rem" }}>
-            <div className="relative" style={{ width: "clamp(100px, 12vw, 160px)", aspectRatio: "2/3" }}>
-              <Image src="/images/original/walking-person.jpg" alt="" fill className="object-cover" style={{ objectPosition: "center 65%" }} />
+          {/* 걸어가는 사람 — 글자 중간에 걸쳐서 배치 (원본처럼) */}
+          <div
+            className="absolute fade-up"
+            data-scroll-animate
+            style={{
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -25%)",
+              width: "clamp(70px, 8vw, 110px)",
+              height: "clamp(110px, 13vw, 170px)",
+              zIndex: 5,
+              overflow: "hidden",
+              mixBlendMode: "multiply",
+            }}
+          >
+            {/* 이미지를 크게 확대해서 사람 부분만 보이도록 */}
+            <div style={{ position: "absolute", width: "900%", height: "900%", top: "-570%", left: "-400%" }}>
+              <Image
+                src="/images/original/walking-person.jpg"
+                alt=""
+                fill
+                className="object-cover"
+              />
             </div>
           </div>
         </div>
@@ -264,7 +285,7 @@ export default function HomePage() {
             <p
               key={i}
               style={{
-                fontSize: "clamp(0.88rem, 1.3vw, 1.05rem)",
+                fontSize: "clamp(1rem, 1.5vw, 1.2rem)",
                 color: "var(--color-sub)",
                 lineHeight: 2.6,
                 fontFamily: "var(--font-body)",
@@ -311,13 +332,13 @@ export default function HomePage() {
           {sectionTitle("For you", "mb-14 md:mb-20")}
 
           {/* 상단 2열 */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
             {FOR_YOU.filter(c => c.wide).map((card, i) => (
               <div
                 key={card.title}
                 className="relative overflow-hidden group fade-up"
                 data-scroll-animate
-                style={{ aspectRatio: "16/10", transitionDelay: `${i * 100}ms` }}
+                style={{ aspectRatio: "16/10", transitionDelay: `${i * 100}ms`, borderRadius: "12px" }}
               >
                 <Image src={card.img} alt={card.title} fill className="object-cover transition-transform group-hover:scale-[1.04]" style={{ transitionDuration: "0.8s" }} />
                 <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.25) 50%, transparent 100%)" }} />
@@ -334,13 +355,13 @@ export default function HomePage() {
           </div>
 
           {/* 하단 3열 */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
             {FOR_YOU.filter(c => !c.wide).map((card, i) => (
               <div
                 key={card.title}
                 className="relative overflow-hidden group fade-up"
                 data-scroll-animate
-                style={{ aspectRatio: "4/3", transitionDelay: `${(i + 2) * 100}ms` }}
+                style={{ aspectRatio: "4/3", transitionDelay: `${(i + 2) * 100}ms`, borderRadius: "12px" }}
               >
                 <Image src={card.img} alt={card.title} fill className="object-cover transition-transform group-hover:scale-[1.04]" style={{ transitionDuration: "0.8s" }} />
                 <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.25) 55%, transparent 100%)" }} />
@@ -359,20 +380,43 @@ export default function HomePage() {
       </section>
 
       {/* ─────────────────────────────────────────────
-          INTERIOR — 동일 크림 배경
+          INTERIOR — 가로 스크롤 갤러리 (원본 사이트처럼)
       ───────────────────────────────────────────── */}
-      <section style={{ backgroundColor: "#FAF8F5", ...SECTION_PAD, paddingBottom: "clamp(5rem, 10vh, 9rem)" }}>
-        <div style={CONTAINER}>
+      <section style={{ backgroundColor: "#FAF8F5", paddingBottom: "clamp(5rem, 10vh, 9rem)" }}>
+        <div style={{ ...SECTION_PAD, ...CONTAINER }}>
           {sectionTitle("Interior", "mb-12 md:mb-16")}
+        </div>
 
-          {/* 사진 그리드 — 가로 스크롤 느낌 */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 fade-up" data-scroll-animate>
-            {INTERIOR.map((src, i) => (
-              <div key={src} className="relative overflow-hidden" style={{ aspectRatio: i === 0 ? "4/3" : "4/3" }}>
-                <Image src={src} alt={`interior ${i + 1}`} fill className="object-cover" />
-              </div>
-            ))}
-          </div>
+        {/* 가로 스크롤 가능한 갤러리 */}
+        <div
+          className="flex gap-4 overflow-x-auto cursor-grab fade-up scrollbar-hide"
+          data-scroll-animate
+          style={{ paddingLeft: "var(--container-padding)", paddingRight: "var(--container-padding)", scrollSnapType: "x mandatory" }}
+          onMouseDown={(e) => {
+            const el = e.currentTarget;
+            let isDown = true;
+            let startX = e.pageX - el.offsetLeft;
+            let scrollLeft = el.scrollLeft;
+            const onMove = (ev: MouseEvent) => {
+              if (!isDown) return;
+              ev.preventDefault();
+              const x = ev.pageX - el.offsetLeft;
+              el.scrollLeft = scrollLeft - (x - startX) * 1.5;
+            };
+            const onUp = () => { isDown = false; document.removeEventListener("mousemove", onMove); document.removeEventListener("mouseup", onUp); };
+            document.addEventListener("mousemove", onMove);
+            document.addEventListener("mouseup", onUp);
+          }}
+        >
+          {INTERIOR.map((src, i) => (
+            <div
+              key={`interior-${i}`}
+              className="relative overflow-hidden group flex-shrink-0"
+              style={{ width: "clamp(320px, 38vw, 520px)", aspectRatio: "3/2", scrollSnapAlign: "start" }}
+            >
+              <Image src={src} alt={`interior ${i + 1}`} fill className="object-cover transition-transform group-hover:scale-[1.03]" style={{ transitionDuration: "0.6s" }} />
+            </div>
+          ))}
         </div>
       </section>
 
@@ -392,7 +436,7 @@ export default function HomePage() {
                 data-scroll-animate
                 style={{ transitionDelay: `${i * 80}ms` }}
               >
-                <div className="relative overflow-hidden" style={{ aspectRatio: "4/3" }}>
+                <div className="relative overflow-hidden" style={{ aspectRatio: "4/3", borderRadius: "12px" }}>
                   <Image
                     src={card.img}
                     alt={card.label}
@@ -401,11 +445,11 @@ export default function HomePage() {
                     style={{ transitionDuration: "0.8s" }}
                   />
                   <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.1) 60%, transparent 100%)" }} />
-                  <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6 z-10">
-                    <h3 style={{ fontFamily: "var(--font-body)", fontSize: "clamp(0.82rem, 1.1vw, 1rem)", fontWeight: 700, color: "#fff", marginBottom: "4px" }}>
+                  <div className="absolute bottom-0 left-0 right-0 p-6 md:p-7 z-10">
+                    <h3 style={{ fontFamily: "var(--font-body)", fontSize: "clamp(0.95rem, 1.3vw, 1.15rem)", fontWeight: 700, color: "#fff", marginBottom: "4px" }}>
                       {card.label}
                     </h3>
-                    <p style={{ fontSize: "clamp(0.62rem, 0.8vw, 0.72rem)", color: "rgba(255,255,255,0.5)", letterSpacing: "0.02em" }}>
+                    <p style={{ fontSize: "clamp(0.72rem, 0.9vw, 0.82rem)", color: "rgba(255,255,255,0.5)", letterSpacing: "0.02em" }}>
                       {card.sub} →
                     </p>
                   </div>
@@ -420,11 +464,11 @@ export default function HomePage() {
           MARQUEE
       ───────────────────────────────────────────── */}
       <section className="overflow-hidden bg-white" style={{ paddingBlock: "clamp(2rem, 4vh, 4rem)" }}>
-        <div className="animate-scroll-left whitespace-nowrap">
+        <div className="animate-scroll-left whitespace-nowrap" style={{ animationDuration: "18s" }}>
           {Array.from({ length: 6 }).map((_, i) => (
             <span
               key={i}
-              className="inline-block mx-4 md:mx-8"
+              className="inline-block mx-12 md:mx-20"
               style={{
                 fontFamily: "var(--font-italic)",
                 fontSize: "clamp(5rem, 16vw, 14rem)",
@@ -456,10 +500,10 @@ export default function HomePage() {
 
             {/* 정보 */}
             <div className="fade-up" data-scroll-animate>
-              <h3 style={{ fontFamily: "var(--font-body)", fontSize: "clamp(1.2rem, 1.8vw, 1.5rem)", fontWeight: 800, letterSpacing: "-0.02em", marginBottom: "2rem" }}>
+              <h3 style={{ fontFamily: "var(--font-body)", fontSize: "clamp(1.4rem, 2.2vw, 1.8rem)", fontWeight: 800, letterSpacing: "-0.02em", marginBottom: "2rem" }}>
                 오시는 길
               </h3>
-              <div style={{ fontSize: "14px", color: "#444", lineHeight: 2.4, marginBottom: "3rem" }}>
+              <div style={{ fontSize: "16px", color: "#444", lineHeight: 2.4, marginBottom: "3rem" }}>
                 <p>서울특별시 강남대로378, 준빌딩</p>
                 <p><strong>9층</strong> &nbsp;남성제모</p>
                 <p><strong>11층</strong> 여성제모 &amp; 상담</p>
@@ -468,10 +512,10 @@ export default function HomePage() {
 
               <div style={{ height: "1px", background: "rgba(0,0,0,0.06)", marginBottom: "2rem" }} />
 
-              <h3 style={{ fontFamily: "var(--font-body)", fontSize: "clamp(1.2rem, 1.8vw, 1.5rem)", fontWeight: 800, letterSpacing: "-0.02em", marginBottom: "2rem" }}>
+              <h3 style={{ fontFamily: "var(--font-body)", fontSize: "clamp(1.4rem, 2.2vw, 1.8rem)", fontWeight: 800, letterSpacing: "-0.02em", marginBottom: "2rem" }}>
                 진료 시간
               </h3>
-              <div style={{ fontSize: "14px", color: "#444", lineHeight: 2.4 }}>
+              <div style={{ fontSize: "16px", color: "#444", lineHeight: 2.4 }}>
                 <div className="flex gap-10">
                   <span className="font-bold" style={{ minWidth: "3rem" }}>평일</span>
                   <span>11:00 – 21:00 <span style={{ color: "var(--color-meta)", fontSize: "12px" }}>(점심 14:00~15:00)</span></span>
@@ -481,78 +525,75 @@ export default function HomePage() {
                   <span>10:00 – 17:30</span>
                 </div>
               </div>
-
-              {/* 전화 + 예약 */}
-              <div style={{ marginTop: "3rem", paddingTop: "2rem", borderTop: "1px solid rgba(0,0,0,0.06)" }}>
-                <a
-                  href="tel:025556231"
-                  style={{
-                    display: "block",
-                    fontFamily: "var(--font-heading)",
-                    fontSize: "clamp(1.6rem, 3vw, 2.2rem)",
-                    fontWeight: 300,
-                    letterSpacing: "0.05em",
-                    color: "var(--color-black)",
-                    marginBottom: "1.5rem",
-                  }}
-                >
-                  02-555-6231
-                </a>
-                <div className="flex flex-wrap gap-3">
-                  {[
-                    { href: "https://booking.naver.com/", label: "네이버 예약" },
-                    { href: "https://pf.kakao.com/", label: "카카오톡 채널" },
-                    { href: "https://www.instagram.com/molessclinic/", label: "Instagram" },
-                  ].map((link) => (
-                    <a
-                      key={link.label}
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="transition-all hover:shadow-md hover:-translate-y-px"
-                      style={{
-                        padding: "10px 24px",
-                        borderRadius: "200px",
-                        border: "1px solid rgba(0,0,0,0.12)",
-                        fontSize: "12px",
-                        fontFamily: "var(--font-body)",
-                        fontWeight: 500,
-                        color: "var(--color-black)",
-                        letterSpacing: "0.03em",
-                        transitionDuration: "var(--duration-normal)",
-                      }}
-                    >
-                      {link.label}
-                    </a>
-                  ))}
-                </div>
-              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* ─────────────────────────────────────────────
-          CLOSING — 감성 이미지
+          CLOSING — 밤하늘 + 상담안내
       ───────────────────────────────────────────── */}
-      <section className="relative" style={{ height: "clamp(50vh, 65vh, 75vh)" }}>
-        <Image src="/images/original/about-hero-woman.jpg" alt="" fill className="object-cover" style={{ filter: "grayscale(1)" }} />
-        <div className="absolute inset-0" style={{ background: "rgba(0,0,0,0.35)" }} />
+      <section className="relative" style={{ height: "clamp(55vh, 70vh, 80vh)" }}>
+        <Image src="/images/original/nate-beach.jpg" alt="" fill className="object-cover" />
+        <div className="absolute inset-0" style={{ background: "rgba(0,0,0,0.45)" }} />
         <div className="absolute inset-0 z-10 flex items-center justify-center text-center px-6">
-          <p
-            className="fade-up"
-            data-scroll-animate
-            style={{
-              fontFamily: "var(--font-body)",
-              fontSize: "clamp(1.4rem, 3.5vw, 2.6rem)",
-              fontWeight: 700,
-              color: "#fff",
-              letterSpacing: "-0.01em",
-              lineHeight: 1.6,
-            }}
-          >
-            레이저제모, 모리스의원
-          </p>
+          <div className="fade-up" data-scroll-animate>
+            <p
+              style={{
+                fontFamily: "var(--font-label)",
+                fontSize: "11px",
+                fontWeight: 600,
+                letterSpacing: "0.22em",
+                color: "rgba(255,255,255,0.6)",
+                textTransform: "uppercase" as const,
+                marginBottom: "1.5rem",
+              }}
+            >
+              상담안내
+            </p>
+            <a
+              href="tel:025556231"
+              style={{
+                display: "block",
+                fontFamily: "var(--font-heading)",
+                fontSize: "clamp(1.8rem, 4vw, 3rem)",
+                fontWeight: 300,
+                letterSpacing: "0.08em",
+                color: "#fff",
+                marginBottom: "2.5rem",
+              }}
+            >
+              TEL : 02-555-6231
+            </a>
+            <div className="flex flex-wrap justify-center gap-4">
+              {[
+                { href: "https://booking.naver.com/", label: "네이버 예약 바로가기" },
+                { href: "https://pf.kakao.com/", label: "카카오톡 채널 바로가기" },
+                { href: "https://www.instagram.com/molessclinic/", label: "인스타그램 바로가기" },
+              ].map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="transition-all hover:bg-white/15"
+                  style={{
+                    padding: "12px 28px",
+                    borderRadius: "9999px",
+                    border: "1px solid rgba(255,255,255,0.5)",
+                    fontSize: "13px",
+                    fontFamily: "var(--font-body)",
+                    fontWeight: 500,
+                    color: "#fff",
+                    letterSpacing: "0.04em",
+                    transitionDuration: "var(--duration-normal)",
+                  }}
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
     </>

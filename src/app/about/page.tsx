@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "병원소개",
@@ -93,11 +92,10 @@ export default function AboutPage() {
         {/* 텍스트 */}
         <div className="relative z-10 text-center px-6">
           <h1
-            className="text-white font-bold text-[clamp(2.2rem,6vw,5rem)] leading-[1.15] tracking-[-0.02em] fade-up"
+            className="text-white font-bold text-[clamp(2rem,5vw,4.2rem)] leading-[1.15] tracking-[-0.02em] fade-up"
             data-scroll-animate
           >
-            <span className="block">레이저제모,</span>
-            <span className="block">모리스의원</span>
+            레이저제모, 모리스의원
           </h1>
         </div>
 
@@ -114,7 +112,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── OUR PROMISE ── */}
-      <section className="section bg-white">
+      <section className="section bg-white pb-24 md:pb-32">
         <div className="container">
           {/* 섹션 헤딩 */}
           <div
@@ -130,7 +128,7 @@ export default function AboutPage() {
           </div>
 
           {/* 3개 약속 카드 */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 lg:gap-16 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-12 lg:gap-20 max-w-5xl mx-auto">
             {PROMISES.map((p, i) => (
               <div
                 key={p.title}
@@ -144,13 +142,13 @@ export default function AboutPage() {
                 </div>
 
                 {/* 제목 */}
-                <h3 className="text-lg md:text-xl font-bold tracking-[-0.01em] mb-3">
+                <h3 className="text-lg md:text-xl font-bold tracking-[-0.01em] mb-5">
                   {p.title}
                 </h3>
 
                 {/* 구분선 */}
                 <div
-                  className="w-8 h-px bg-[#d4d4d4] mb-4"
+                  className="w-8 h-px bg-[#d4d4d4] mb-6"
                   aria-hidden="true"
                 />
 
@@ -206,13 +204,13 @@ export default function AboutPage() {
                   Moless Clinic
                 </p>
                 <h3 className="text-2xl md:text-3xl font-bold tracking-[-0.02em] mb-2">
-                  레이저제모는? 모리스의원.
+                  레이저제모는? 모리스의원
                 </h3>
               </div>
 
               <div className="w-10 h-px bg-[#d4d4d4]" aria-hidden="true" />
 
-              <div className="space-y-5 text-[#525252] font-light leading-[1.9] text-[15px]">
+              <div className="space-y-8 text-[#525252] font-light leading-[1.9] text-[15px]">
                 <p>
                   모리스의원은 제모 한 분야에 집중하는 레이저 제모 전문
                   의원입니다. 다양한 시술을 나열하는 대신, 레이저 제모만큼은
@@ -227,70 +225,7 @@ export default function AboutPage() {
                   제모 시술에만 집중합니다.
                 </p>
               </div>
-
-              <div className="flex flex-col sm:flex-row gap-4 mt-4">
-                <Link
-                  href="/equipment/gentlemax"
-                  className="btn btn-outline text-sm tracking-[0.06em]"
-                >
-                  장비 소개 보기
-                  <svg
-                    className="w-4 h-4"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={1.5}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M4.5 19.5l15-15M19.5 4.5H8.25M19.5 4.5v11.25"
-                    />
-                  </svg>
-                </Link>
-                <Link
-                  href="/reservation"
-                  className="btn btn-primary text-sm tracking-[0.06em]"
-                >
-                  예약하기
-                </Link>
-              </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── 하단 CTA ── */}
-      <section className="section bg-[#0a0a0a] text-white text-center">
-        <div className="container max-w-2xl">
-          <p
-            className="text-[11px] font-medium tracking-[0.35em] text-white/40 uppercase mb-6 fade-up"
-            data-scroll-animate
-          >
-            Get Started
-          </p>
-          <h2
-            className="text-[clamp(1.8rem,4vw,3rem)] font-bold tracking-[-0.02em] mb-8 fade-up delay-100"
-            data-scroll-animate
-          >
-            지금 상담을 시작하세요
-          </h2>
-          <div
-            className="flex flex-col sm:flex-row gap-4 justify-center fade-up delay-200"
-            data-scroll-animate
-          >
-            <Link
-              href="/reservation"
-              className="btn btn-outline-white text-sm tracking-[0.06em] px-8 py-4"
-            >
-              네이버 예약
-            </Link>
-            <Link
-              href="/pricing/female"
-              className="btn border border-white/20 text-white/60 hover:text-white hover:border-white/60 text-sm tracking-[0.06em] px-8 py-4 transition-colors"
-            >
-              가격 안내 보기
-            </Link>
           </div>
         </div>
       </section>

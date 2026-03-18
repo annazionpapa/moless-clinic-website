@@ -17,41 +17,36 @@ const HISTORY = [
   { name: "아포지 엘리트 플러스", gen: "5세대", highlight: true },
 ];
 
-/* ─── 스펙 데이터 ─── */
-const SPECS = [
-  { label: "제조사", value: "Cynosure (USA)" },
-  { label: "파장", value: "755nm + 1064nm" },
-  { label: "레이저 타입", value: "Alexandrite / Nd:YAG" },
-  { label: "스팟 사이즈", value: "최대 24mm" },
-  { label: "냉각 시스템", value: "Cryo6 통합 냉각" },
-  { label: "반복률", value: "최대 5Hz" },
-];
-
-/* ─── 특장점 데이터 ─── */
-const FEATURES = [
+/* ─── 포인트별 특장점 데이터 ─── */
+const POINTS = [
   {
-    num: "01",
-    title: "5세대 기술 진화",
-    subtitle: "어클레임에서 아포지 엘리트 플러스까지",
-    desc: "아포지 엘리트 플러스는 수십 년간 이어온 레이저 기술의 결정체입니다. 어클레임에서 시작해 5세대에 걸친 진화를 거치며 출력 안정성, 냉각 효율, 피부 타입 적용 범위가 지속적으로 개선되었습니다.",
+    point: "Point 1",
+    image: "/images/original/slide-002.png",
+    imageAlt: "아포지 엘리트 플러스 장비",
+    title: "5세대 기술 진화, Cynosure사",
+    desc: "아포지 엘리트 플러스는 수십 년간 이어온 레이저 기술의 결정체입니다. 어클레임에서 시작해 5세대에 걸친 진화를 거치며 출력 안정성, 냉각 효율, 피부 타입 적용 범위가 지속적으로 개선되었습니다. 미국 Cynosure사의 기술력이 집약된 프리미엄 장비입니다.",
   },
   {
-    num: "02",
-    title: "듀얼 파장 시스템",
-    subtitle: "755nm Alexandrite + 1064nm Nd:YAG",
-    desc: "755nm 알렉산드라이트 파장은 멜라닌 흡수율이 높아 밝은 피부의 굵은 체모에 최적이며, 1064nm Nd:YAG 파장은 더 깊은 조직 침투와 어두운 피부 타입에도 안전하게 적용 가능합니다.",
+    point: "Point 2",
+    image: "/images/original/gentlemax-handpiece.jpg",
+    imageAlt: "듀얼 파장 핸드피스",
+    title: "755nm + 1064nm 듀얼 파장 시스템",
+    desc: "755nm 알렉산드라이트 파장은 멜라닌 흡수율이 높아 밝은 피부의 굵은 체모에 최적이며, 1064nm Nd:YAG 파장은 더 깊은 조직 침투와 어두운 피부 타입에도 안전하게 적용 가능합니다. 두 파장을 하나의 장비에서 구현하여 맞춤 시술이 가능합니다.",
   },
   {
-    num: "03",
-    title: "Cryo6 냉각 시스템",
-    subtitle: "시술 전 · 중 · 후 지속 냉각",
-    desc: "레이저 조사 전, 중, 후에 걸쳐 피부 표면을 지속적으로 냉각하여 열 손상과 통증을 동시에 억제합니다. 냉각 강도는 단계별로 조절 가능하여 부위별 민감도에 맞춰 최적화합니다.",
+    point: "Point 3",
+    image: "/images/original/skin-texture.jpg",
+    imageAlt: "Cryo6 냉각 시스템",
+    title: "Cryo6 냉각 시스템, 통증 최소화",
+    desc: "레이저 조사 전, 중, 후에 걸쳐 피부 표면을 지속적으로 냉각하여 열 손상과 통증을 동시에 억제합니다. 냉각 강도는 단계별로 조절 가능하여 부위별 민감도에 맞춰 최적화하며, 시술의 편안함을 극대화합니다.",
   },
   {
-    num: "04",
-    title: "빠른 시술 속도",
-    subtitle: "최대 5Hz 반복률",
-    desc: "높은 반복률로 빠르고 균일한 시술이 가능합니다. 넓은 부위도 짧은 시간 안에 시술이 완료되어 환자의 부담을 최소화하며, 균일한 에너지 전달로 일관된 결과를 보장합니다.",
+    point: "Point 4",
+    image: null,
+    imageAlt: "",
+    title: "Apogee Elite Plus™ 정품 사용, 공식 인증",
+    desc: "모리스의원은 공식 수입사를 통해 인증된 정품 장비만을 사용합니다. 아포지 엘리트 플러스 정품 구매 영수증과 보증서가 발급되는 공식 장비로, 유사품과 복제품과는 출력 안정성, 냉각 효율, 시술 결과 모두 다릅니다.",
+    isLogo: true,
   },
 ];
 
@@ -66,66 +61,29 @@ const NAV_LINKS = [
 export default function ApogeePage() {
   return (
     <>
-      {/* ── 풀스크린 히어로 ── */}
-      <section className="relative min-h-screen overflow-hidden bg-[#0a0a0a] flex items-center">
-        {/* 배경 그라데이션 */}
-        <div
-          className="absolute inset-0 bg-gradient-to-bl from-[#0a0a0a] via-[#1a1a1a] to-[#0a0a0a]"
-          aria-hidden="true"
+      {/* ── 히어로: 흑백 여성 사진 배경 ── */}
+      <section className="relative min-h-[80vh] md:min-h-screen overflow-hidden flex items-center justify-center">
+        {/* B&W 배경 이미지 */}
+        <Image
+          src="/images/original/about-hero-woman.jpg"
+          alt="배경"
+          fill
+          className="object-cover object-[50%_30%] grayscale brightness-[0.4]"
+          priority
         />
-        <div
-          className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40"
-          aria-hidden="true"
-        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/70" aria-hidden="true" />
 
-        {/* 콘텐츠 */}
-        <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 pt-[var(--header-height)] pb-24">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            {/* 왼쪽: 텍스트 */}
-            <div className="flex flex-col gap-6">
-              <p
-                className="text-white/40 text-[11px] font-medium tracking-[0.35em] uppercase fade-up"
-                data-scroll-animate
-              >
-                Equipment 02
-              </p>
-              <div
-                className="w-px h-12 bg-white/20 fade-up delay-100"
-                data-scroll-animate
-                aria-hidden="true"
-              />
-              <h1
-                className="text-white font-light leading-[1.05] tracking-[-0.02em] text-[clamp(2.2rem,6vw,5rem)] fade-up delay-200"
-                data-scroll-animate
-              >
-                아포지<br />엘리트플러스
-              </h1>
-              <p
-                className="text-white/50 text-base md:text-lg font-light leading-relaxed max-w-[440px] fade-up delay-300"
-                data-scroll-animate
-              >
-                Apogee Elite Plus &mdash; Dual Wavelength<br />
-                755nm + 1064nm | Cryo6 Cooling System
-              </p>
-            </div>
-
-            {/* 오른쪽: 장비 이미지 */}
-            <div
-              className="relative flex items-center justify-center fade-up delay-300"
-              data-scroll-animate
-            >
-              <div className="relative w-full max-w-[500px] mx-auto">
-                <Image
-                  src="/images/original/slide-002.png"
-                  alt="아포지 엘리트 플러스 장비"
-                  width={800}
-                  height={800}
-                  className="w-full h-auto object-contain drop-shadow-2xl"
-                  priority
-                />
-              </div>
-            </div>
-          </div>
+        {/* 텍스트 오버레이 */}
+        <div className="relative z-10 text-center px-6 pt-[var(--header-height)]">
+          <p className="text-white/60 text-xs md:text-sm tracking-[0.3em] uppercase mb-6 fade-up" data-scroll-animate>
+            모리스의원
+          </p>
+          <h1
+            className="text-white font-bold leading-[1.05] tracking-[-0.02em] text-[clamp(2.4rem,7vw,5.5rem)] fade-up delay-200"
+            data-scroll-animate
+          >
+            아포지엘리트플러스,
+          </h1>
         </div>
 
         {/* 스크롤 인디케이터 */}
@@ -135,33 +93,44 @@ export default function ApogeePage() {
         </div>
       </section>
 
-      {/* ── 장비 개요 ── */}
-      <section className="py-24 md:py-32 bg-white">
-        <div className="max-w-3xl mx-auto px-6 md:px-10">
-          <div className="text-center fade-up" data-scroll-animate>
-            <p className="text-[11px] font-medium tracking-[0.35em] text-[#a3a3a3] uppercase mb-4">
-              About
+      {/* ── 브랜드명 섹션 (블랙 배경) ── */}
+      <section className="bg-black py-20 md:py-28">
+        <div className="max-w-5xl mx-auto px-6 text-center fade-up" data-scroll-animate>
+          <h2 className="text-[#E91E8C] text-[clamp(1.6rem,4vw,3rem)] font-light tracking-[0.05em]">
+            Cynosure. Apogee Elite Plus&trade;
+          </h2>
+        </div>
+      </section>
+
+      {/* ── 장비 메인 이미지 (블랙 배경) ── */}
+      <section className="bg-black py-16 md:py-24">
+        <div className="max-w-3xl mx-auto px-6 fade-up" data-scroll-animate>
+          <div className="flex justify-center">
+            <Image
+              src="/images/original/slide-002.png"
+              alt="아포지 엘리트 플러스 장비"
+              width={700}
+              height={700}
+              className="w-full max-w-[600px] h-auto object-contain"
+            />
+          </div>
+          <div className="text-center mt-12">
+            <p className="text-white/80 text-lg md:text-xl tracking-wide font-light">
+              Cynosure, 아포지 엘리트 플러스&trade;
             </p>
-            <h2 className="text-[clamp(1.6rem,3.5vw,2.6rem)] font-bold tracking-[-0.02em] mb-8 text-[#0a0a0a]">
-              5세대 기술의 결정체
-            </h2>
-            <p className="text-[#737373] leading-[1.9] font-light text-base md:text-lg">
-              아포지 엘리트 플러스는 어클레임에서 시작된 레이저 기술의 5세대 진화 모델입니다.
-              각 세대마다 출력 안정성, 냉각 효율, 피부 타입 적용 범위가 개선되어 왔으며,
-              현재의 아포지 엘리트 플러스는 그 모든 기술적 축적의 최정점에 있는 장비입니다.
-            </p>
+            <div className="w-full max-w-md mx-auto mt-6 h-px bg-white/20" aria-hidden="true" />
           </div>
         </div>
       </section>
 
-      {/* ── 진화 타임라인 ── */}
-      <section className="py-24 md:py-32 bg-[#f7f7f7]">
+      {/* ── 진화 타임라인 (블랙 배경) ── */}
+      <section className="bg-black py-16 md:py-20">
         <div className="max-w-4xl mx-auto px-6 md:px-10">
-          <div className="mb-14 fade-up" data-scroll-animate>
-            <p className="text-[11px] font-medium tracking-[0.35em] text-[#a3a3a3] uppercase mb-4">
+          <div className="mb-10 text-center fade-up" data-scroll-animate>
+            <p className="text-white/30 text-[11px] font-medium tracking-[0.35em] uppercase mb-4">
               Evolution
             </p>
-            <h2 className="text-[clamp(1.6rem,3vw,2.4rem)] font-bold tracking-[-0.02em] text-[#0a0a0a]">
+            <h2 className="text-white text-[clamp(1.4rem,3vw,2rem)] font-light tracking-wide">
               끊임없는 기술 진화
             </h2>
           </div>
@@ -175,12 +144,12 @@ export default function ApogeePage() {
                     className={[
                       "w-3.5 h-3.5 rounded-full shrink-0 border-2 transition-colors",
                       item.highlight
-                        ? "bg-[#0a0a0a] border-[#0a0a0a] scale-125"
-                        : "bg-white border-[#d4d4d4]",
+                        ? "bg-[#E91E8C] border-[#E91E8C] scale-125"
+                        : "bg-transparent border-white/30",
                     ].join(" ")}
                   />
                   {i < HISTORY.length - 1 && (
-                    <div className="w-px h-8 md:w-full md:h-px bg-[#d4d4d4]" aria-hidden="true" />
+                    <div className="w-px h-8 md:w-full md:h-px bg-white/20" aria-hidden="true" />
                   )}
                 </div>
                 {/* 레이블 */}
@@ -188,7 +157,7 @@ export default function ApogeePage() {
                   <p
                     className={[
                       "text-[10px] font-medium tracking-[0.2em] uppercase mb-1",
-                      item.highlight ? "text-[#0a0a0a]" : "text-[#a3a3a3]",
+                      item.highlight ? "text-[#E91E8C]" : "text-white/40",
                     ].join(" ")}
                   >
                     {item.gen}
@@ -196,7 +165,7 @@ export default function ApogeePage() {
                   <p
                     className={[
                       "text-sm md:text-base",
-                      item.highlight ? "text-[#0a0a0a] font-bold" : "text-[#737373] font-light",
+                      item.highlight ? "text-white font-bold" : "text-white/50 font-light",
                     ].join(" ")}
                   >
                     {item.name}
@@ -208,132 +177,83 @@ export default function ApogeePage() {
         </div>
       </section>
 
-      {/* ── 스펙 테이블 ── */}
-      <section className="py-24 md:py-32 bg-white">
-        <div className="max-w-4xl mx-auto px-6 md:px-10">
-          <div className="mb-14 fade-up" data-scroll-animate>
-            <p className="text-[11px] font-medium tracking-[0.35em] text-[#a3a3a3] uppercase mb-4">
-              Specification
-            </p>
-            <h2 className="text-[clamp(1.6rem,3vw,2.4rem)] font-bold tracking-[-0.02em] text-[#0a0a0a]">
-              장비 사양
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-[#e5e5e5] fade-up delay-100" data-scroll-animate>
-            {SPECS.map((spec) => (
-              <div key={spec.label} className="bg-[#f7f7f7] p-8">
-                <p className="text-[11px] font-medium tracking-[0.2em] text-[#a3a3a3] uppercase mb-3">
-                  {spec.label}
-                </p>
-                <p className="text-lg font-medium tracking-[-0.01em] text-[#0a0a0a]">
-                  {spec.value}
-                </p>
+      {/* ── 포인트별 특장점 (블랙 배경, 이미지 좌 + 텍스트 우) ── */}
+      <section className="bg-black py-20 md:py-28">
+        <div className="max-w-6xl mx-auto px-6 md:px-10 space-y-20 md:space-y-28">
+          {POINTS.map((point, i) => (
+            <div
+              key={point.point}
+              className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center fade-up"
+              data-scroll-animate
+              style={{ transitionDelay: `${i * 100}ms` }}
+            >
+              {/* 왼쪽: 이미지 */}
+              <div className="flex justify-center">
+                {point.isLogo ? (
+                  /* Point 4: Cynosure 로고 영역 */
+                  <div className="w-full max-w-[400px] aspect-[4/3] rounded-2xl bg-[#141414] border border-white/10 flex items-center justify-center">
+                    <div className="text-center">
+                      <p className="text-white/30 text-xs tracking-[0.3em] uppercase mb-3">Official Partner</p>
+                      <p className="text-white/70 text-2xl md:text-3xl font-light tracking-[0.1em]">CYNOSURE</p>
+                      <p className="text-white/30 text-xs tracking-wider mt-2">Authorized Equipment</p>
+                    </div>
+                  </div>
+                ) : point.image ? (
+                  <div className="w-full max-w-[400px] aspect-[4/3] rounded-2xl bg-[#141414] overflow-hidden relative">
+                    <Image
+                      src={point.image}
+                      alt={point.imageAlt}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                ) : null}
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* ── 특장점 4가지 ── */}
-      <section className="py-24 md:py-32 bg-[#f7f7f7]">
-        <div className="max-w-5xl mx-auto px-6 md:px-10">
-          <div className="mb-16 fade-up" data-scroll-animate>
-            <p className="text-[11px] font-medium tracking-[0.35em] text-[#a3a3a3] uppercase mb-4">
-              Features
-            </p>
-            <h2 className="text-[clamp(1.6rem,3vw,2.4rem)] font-bold tracking-[-0.02em] text-[#0a0a0a]">
-              핵심 기술
-            </h2>
-          </div>
-
-          <div className="space-y-0">
-            {FEATURES.map((feature, i) => (
-              <div
-                key={feature.num}
-                className="grid grid-cols-1 lg:grid-cols-[80px_1fr_2fr] gap-6 lg:gap-10 py-10 border-t border-[#e5e5e5] last:border-b fade-up"
-                data-scroll-animate
-                style={{ transitionDelay: `${i * 80}ms` }}
-              >
-                {/* 번호 */}
-                <span className="text-[#d4d4d4] text-3xl font-light tracking-tight">
-                  {feature.num}
-                </span>
-
-                {/* 제목 */}
-                <div>
-                  <h3 className="text-xl font-bold tracking-[-0.01em] text-[#0a0a0a] mb-1">
-                    {feature.title}
-                  </h3>
-                  <p className="text-sm text-[#a3a3a3] font-light">
-                    {feature.subtitle}
-                  </p>
-                </div>
-
-                {/* 설명 */}
-                <p className="text-[#737373] leading-[1.9] font-light text-sm md:text-base">
-                  {feature.desc}
+              {/* 오른쪽: 텍스트 */}
+              <div className="flex flex-col gap-4">
+                <p className="text-white/30 text-xs tracking-[0.3em] uppercase font-medium">
+                  {point.point}
                 </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── 정품 인증 섹션 ── */}
-      <section className="py-24 md:py-32 bg-[#0a0a0a] text-white">
-        <div className="max-w-4xl mx-auto px-6 md:px-10 text-center">
-          <div className="fade-up" data-scroll-animate>
-            <p className="text-[11px] font-medium tracking-[0.35em] text-white/40 uppercase mb-6">
-              Authenticity
-            </p>
-            <h2 className="text-[clamp(1.8rem,3.5vw,3rem)] font-bold tracking-[-0.02em] mb-8">
-              모리스의원은<br />정품만 사용합니다
-            </h2>
-            <p className="text-white/50 leading-[1.9] font-light max-w-2xl mx-auto mb-10">
-              아포지 엘리트 플러스는 정품 구매 영수증과 보증서가 발급되는 공식 장비입니다.
-              유사품과 복제품과는 출력 안정성, 냉각 효율, 시술 결과 모두 다릅니다.
-              모리스의원에서 직접 확인하세요.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <div className="border border-white/20 px-8 py-4 text-sm text-white/60 tracking-wider">
-                정품 구매 확인서 보유
-              </div>
-              <div className="border border-white/20 px-8 py-4 text-sm text-white/60 tracking-wider">
-                공식 수입사 인증
+                <h3 className="text-[#E91E8C] text-xl md:text-2xl font-bold leading-snug">
+                  {point.title}
+                </h3>
+                <p className="text-white/60 leading-[1.9] font-light text-sm md:text-base">
+                  {point.desc}
+                </p>
               </div>
             </div>
-          </div>
+          ))}
         </div>
       </section>
 
       {/* ── 하단 네비게이션 ── */}
-      <section className="py-24 md:py-32 bg-white">
+      <section className="py-24 md:py-32 bg-[#0a0a0a]">
         <div className="max-w-5xl mx-auto px-6 md:px-10">
           <div className="mb-12 text-center fade-up" data-scroll-animate>
-            <p className="text-[11px] font-medium tracking-[0.35em] text-[#a3a3a3] uppercase mb-3">
+            <p className="text-[11px] font-medium tracking-[0.35em] text-white/30 uppercase mb-3">
               Explore
             </p>
-            <h2 className="text-2xl font-bold tracking-[-0.01em] text-[#0a0a0a]">더 알아보기</h2>
+            <h2 className="text-2xl font-bold tracking-[-0.01em] text-white">더 알아보기</h2>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-[#e5e5e5]">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/10">
             {NAV_LINKS.map((link, i) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="bg-white px-6 py-10 flex flex-col items-center justify-center gap-3 group transition-colors hover:bg-[#0a0a0a] fade-up"
+                className="bg-[#0a0a0a] px-6 py-10 flex flex-col items-center justify-center gap-3 group transition-colors hover:bg-[#1a1a1a] fade-up"
                 data-scroll-animate
                 style={{ transitionDelay: `${i * 80}ms` }}
               >
-                <span className="text-[10px] font-medium tracking-[0.2em] text-[#a3a3a3] uppercase group-hover:text-white/40 transition-colors">
+                <span className="text-[10px] font-medium tracking-[0.2em] text-white/30 uppercase group-hover:text-[#E91E8C]/60 transition-colors">
                   {link.sub}
                 </span>
-                <span className="text-sm md:text-base font-light tracking-[-0.01em] group-hover:text-white transition-colors text-center">
+                <span className="text-sm md:text-base font-light tracking-[-0.01em] text-white/70 group-hover:text-white transition-colors text-center">
                   {link.label}
                 </span>
                 <svg
-                  className="w-4 h-4 text-[#d4d4d4] group-hover:text-white/60 transition-colors"
+                  className="w-4 h-4 text-white/20 group-hover:text-[#E91E8C]/60 transition-colors"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
