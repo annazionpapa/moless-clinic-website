@@ -47,6 +47,7 @@ export default function PopupNotice() {
 
         {/* 노트 본체 - 두꺼운 손그림 테두리 */}
         <div
+          className="flex flex-col"
           style={{
             background: "#fafaf7",
             border: "5px solid #222",
@@ -54,9 +55,10 @@ export default function PopupNotice() {
             boxShadow: "5px 8px 25px rgba(0,0,0,0.3)",
             position: "relative",
             zIndex: 2,
+            minHeight: "65vh",
           }}
         >
-          <div className="px-10 pt-16 pb-12 text-center sm:px-16 sm:pt-20 sm:pb-16">
+          <div className="flex-1 flex flex-col justify-center px-10 pt-16 pb-12 text-center sm:px-16 sm:pt-20 sm:pb-16">
             {/* 메가폰 + 제목 */}
             <div className="flex items-center justify-center gap-4 mb-6">
               <span className="text-[3.5rem] sm:text-[5rem] leading-none">📢</span>
@@ -119,7 +121,7 @@ export default function PopupNotice() {
           </div>
 
           {/* @molessclinic */}
-          <div className="flex items-center gap-4 px-10 pb-12 sm:px-16 sm:pb-14">
+          <div className="flex items-center gap-4 px-10 pb-10 sm:px-16 sm:pb-12 mt-auto">
             <div className="flex-1 h-[2px] bg-[#222]" />
             <a
               href="https://www.instagram.com/molessclinic/"
