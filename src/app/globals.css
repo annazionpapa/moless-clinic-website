@@ -1,34 +1,52 @@
+/* ─── 웹폰트 임포트 (디자인 토큰 기반) ─── */
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,500;1,400;1,500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Castoro&display=swap");
 @import "tailwindcss";
 
-/* ─── CSS 변수 ─── */
+/* ═══════════════════════════════════════════
+   CSS 변수 — molessclinic.com 디자인 토큰
+   ═══════════════════════════════════════════ */
 :root {
-  /* 브랜드 컬러 */
+  /* ── 컬러 ── */
+  --color-accent: #003882;
   --color-black: #0a0a0a;
   --color-white: #ffffff;
-  --color-gray-50: #f9f9f9;
-  --color-gray-100: #f0f0f0;
-  --color-gray-200: #e5e5e5;
-  --color-gray-300: #d4d4d4;
-  --color-gray-400: #a3a3a3;
-  --color-gray-500: #737373;
-  --color-gray-600: #525252;
-  --color-gray-700: #404040;
-  --color-gray-800: #262626;
-  --color-gray-900: #171717;
+  --color-body: #000000;
+  --color-sub: #585858;
+  --color-meta: #6e6e6e;
+  --color-dropdown-desc: #707070;
+  --color-cta-bg: #ECEBE9;
+  --color-cta-text: #4B4F52;
+  --color-form-border: #aaaaaa;
+  --color-form-hover: #0a0a0a;
 
-  /* 레이아웃 */
-  --header-height: 72px;
-  --section-padding-x: clamp(1.5rem, 5vw, 6rem);
-  --section-padding-y: clamp(5rem, 10vh, 9rem);
-  --max-width: 1440px;
+  /* ── 레이아웃 ── */
+  --header-height: 130px;
+  --header-height-mobile: 74px;
+  --logo-height: 80px;
+  --logo-height-mobile: 50px;
+  --max-width: 1425px;
+  --max-width-wide: 2000px;
+  --container-padding: 70px;
+  --col-gap: 50px;
 
-  /* 타이포그래피 */
-  --font-sans: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  --font-serif: "Cormorant Garamond", "Georgia", serif;
+  /* ── 타이포그래피 ── */
+  --font-body: 'Noto Sans KR', sans-serif;
+  --font-heading: 'Urbanist', sans-serif;
+  --font-bold: 'Public Sans', sans-serif;
+  --font-italic: 'Cormorant', serif;
+  --font-quote: 'Castoro', serif;
+  --font-label: 'Public Sans', sans-serif;
+  --font-subpage: 'Pretendard Variable', 'Pretendard', sans-serif;
+  --font-sans: 'Noto Sans KR', 'Pretendard Variable', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
 
-  /* 트랜지션 */
+  /* ── 트랜지션 ── */
+  --ease-waypoint: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-menu: cubic-bezier(0.25, 0, 0.4, 1);
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
   --duration-fast: 200ms;
@@ -39,19 +57,15 @@
 /* ─── 테마 설정 (Tailwind v4) ─── */
 @theme inline {
   --font-sans: var(--font-sans);
-  --font-serif: var(--font-serif);
+  --font-heading: var(--font-heading);
+  --font-italic: var(--font-italic);
   --color-black: var(--color-black);
   --color-white: var(--color-white);
-}
-
-.font-serif {
-  font-family: var(--font-serif);
+  --color-accent: var(--color-accent);
 }
 
 /* ─── 기본 리셋 & 베이스 ─── */
-*,
-*::before,
-*::after {
+*, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -65,26 +79,71 @@ html {
 }
 
 body {
-  font-family: var(--font-sans);
+  font-family: var(--font-body);
+  font-size: 17px;
   font-weight: 400;
-  line-height: 1.6;
-  color: var(--color-black);
+  line-height: 26px;
+  letter-spacing: -0.02em;
+  color: var(--color-body);
   background-color: var(--color-white);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  word-break: keep-all !important;
 }
 
-/* 메뉴 오버레이 열렸을 때 스크롤 방지 */
 body.menu-open {
   overflow: hidden;
 }
 
-/* ─── 타이포그래피 스케일 ─── */
-h1, h2, h3, h4, h5, h6 {
+/* ─── 타이포그래피 (디자인 토큰 매핑) ─── */
+h1 {
+  font-family: var(--font-heading);
+  font-size: 62px;
+  line-height: 68px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  word-break: keep-all;
+}
+
+h2 {
   font-family: var(--font-sans);
-  line-height: 1.2;
-  letter-spacing: -0.02em;
+  font-size: 46px;
+  line-height: 56px;
+  letter-spacing: -0.03em;
+  word-break: keep-all;
+}
+
+h3 {
+  font-family: var(--font-sans);
+  font-size: 30px;
+  line-height: 38px;
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  word-break: keep-all;
+}
+
+h4 {
+  font-family: var(--font-sans);
+  font-size: 22px;
+  line-height: 28px;
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  word-break: keep-all;
+}
+
+h5 {
+  font-size: 18px;
+  line-height: 30px;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  word-break: keep-all;
+}
+
+h6 {
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 400;
   word-break: keep-all;
 }
 
@@ -103,33 +162,32 @@ img, video {
   display: block;
 }
 
-/* ─── 스크롤바 커스텀 ─── */
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: var(--color-gray-100);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--color-gray-400);
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-gray-600);
-}
+/* ─── 폰트 유틸리티 ─── */
+.font-heading { font-family: var(--font-heading); }
+.font-italic { font-family: var(--font-italic); font-style: italic; }
+.font-bold-sans { font-family: var(--font-bold); font-weight: 600; }
+.font-label { font-family: var(--font-label); font-weight: 500; }
+.font-quote { font-family: var(--font-quote); }
+.font-subpage { font-family: var(--font-subpage); font-weight: 700; }
+.content-color { color: var(--color-sub); }
 
-/* ─── 선택 영역 ─── */
+/* ─── 스크롤바 ─── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #f0f0f0; }
+::-webkit-scrollbar-thumb { background: #a3a3a3; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #525252; }
+
 ::selection {
   background-color: var(--color-black);
   color: var(--color-white);
 }
 
-/* ─── 스크롤 애니메이션 클래스 ─── */
+/* ─── 스크롤 애니메이션 ─── */
 .fade-up {
   opacity: 0;
   transform: translateY(40px);
-  transition: opacity var(--duration-slow) var(--ease-out-expo),
-              transform var(--duration-slow) var(--ease-out-expo);
+  transition: opacity var(--duration-slow) var(--ease-waypoint),
+              transform var(--duration-slow) var(--ease-waypoint);
 }
 .fade-up.is-visible {
   opacity: 1;
@@ -138,61 +196,72 @@ img, video {
 
 .fade-in {
   opacity: 0;
-  transition: opacity var(--duration-slow) var(--ease-out-expo);
+  transition: opacity var(--duration-slow) var(--ease-waypoint);
 }
 .fade-in.is-visible {
   opacity: 1;
 }
 
-/* 지연 클래스 */
 .delay-100 { transition-delay: 100ms; }
 .delay-200 { transition-delay: 200ms; }
 .delay-300 { transition-delay: 300ms; }
 .delay-400 { transition-delay: 400ms; }
 .delay-500 { transition-delay: 500ms; }
 
-/* ─── 섹션 공통 여백 ─── */
+/* ─── 레이아웃 ─── */
 .section {
-  padding: var(--section-padding-y) var(--section-padding-x);
+  padding: clamp(5rem, 10vh, 9rem) var(--container-padding);
 }
 
 .container {
   max-width: var(--max-width);
   margin-inline: auto;
   width: 100%;
+  padding-inline: var(--container-padding);
 }
 
-/* ─── 헤더 고정 오프셋 ─── */
+@media (max-width: 999px) {
+  .container, .section {
+    padding-inline: 30px;
+  }
+}
+
+@media (max-width: 690px) {
+  .container, .section {
+    padding-inline: 20px;
+  }
+}
+
 .pt-header {
   padding-top: var(--header-height);
 }
 
-/* ─── 버튼 기본 ─── */
+/* ─── 버튼 (디자인 토큰: rounded 200px) ─── */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.875rem 2rem;
-  font-family: var(--font-sans);
-  font-size: 0.875rem;
+  padding: 15px 35px;
+  font-family: var(--font-label);
+  font-size: 16px;
   font-weight: 500;
-  letter-spacing: 0.04em;
   line-height: 1;
   cursor: pointer;
   border: none;
-  transition: background-color var(--duration-fast) var(--ease-in-out),
-              color var(--duration-fast) var(--ease-in-out),
-              border-color var(--duration-fast) var(--ease-in-out);
+  border-radius: 200px;
+  transition: all var(--duration-normal) var(--ease-waypoint);
   white-space: nowrap;
+}
+
+.btn:hover {
+  box-shadow: 0 20px 38px rgba(0,0,0,0.16);
+  transform: translateY(-3px);
 }
 
 .btn-primary {
   background-color: var(--color-black);
   color: var(--color-white);
-}
-.btn-primary:hover {
-  background-color: var(--color-gray-800);
 }
 
 .btn-outline {
@@ -216,19 +285,14 @@ img, video {
 }
 
 /* ─── 텍스트 유틸리티 ─── */
-.text-balance {
-  text-wrap: balance;
-}
-
-.tracking-widest-kr {
-  letter-spacing: 0.2em;
-}
+.text-balance { text-wrap: balance; }
+.tracking-widest-kr { letter-spacing: 0.2em; }
 
 /* ─── 구분선 ─── */
 .divider {
   width: 1px;
   height: 60px;
-  background-color: var(--color-gray-300);
+  background-color: #d4d4d4;
 }
 
 /* ─── 이미지 오버레이 ─── */
@@ -236,14 +300,10 @@ img, video {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.2) 0%,
-    rgba(0, 0, 0, 0.5) 100%
-  );
+  background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.5) 100%);
 }
 
-/* ─── 히어로 SCROLL DOWN 회전 텍스트 ─── */
+/* ─── 히어로 스크롤 인디케이터 ─── */
 @keyframes spin-slow {
   from { transform: rotate(0deg); }
   to   { transform: rotate(360deg); }
@@ -252,22 +312,17 @@ img, video {
   animation: spin-slow 12s linear infinite;
 }
 
-/* ─── 헤더 언더라인 호버 ─── */
+/* ─── 링크 언더라인 호버 (디자인 토큰: background-size 트랜지션) ─── */
 .link-underline {
   position: relative;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0% 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 1px;
+  transition: background-size var(--duration-normal) var(--ease-menu);
 }
-.link-underline::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background-color: currentColor;
-  transition: width var(--duration-normal) var(--ease-out-expo);
-}
-.link-underline:hover::after {
-  width: 100%;
+.link-underline:hover {
+  background-size: 100% 1px;
 }
 
 /* ─── 팝업 애니메이션 ─── */
@@ -278,4 +333,13 @@ img, video {
 @keyframes slideUp {
   from { opacity: 0; transform: translateY(30px) scale(0.96); }
   to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ─── 스크롤링 텍스트 마퀴 ─── */
+@keyframes scroll-left {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-scroll-left {
+  animation: scroll-left 20s linear infinite;
 }
