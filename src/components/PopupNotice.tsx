@@ -56,18 +56,18 @@ export default function PopupNotice() {
             zIndex: 2,
           }}
         >
-          <div className="px-10 pt-14 pb-10 text-center sm:px-16 sm:pt-16 sm:pb-14">
+          <div className="px-10 pt-16 pb-12 text-center sm:px-16 sm:pt-20 sm:pb-16">
             {/* 메가폰 + 제목 */}
-            <div className="flex items-center justify-center gap-4 mb-4">
-              <span className="text-[3.5rem] sm:text-[4.5rem] leading-none">📢</span>
-              <h2 className="text-[2.8rem] sm:text-[3.5rem] font-black tracking-tight leading-none">
+            <div className="flex items-center justify-center gap-4 mb-6">
+              <span className="text-[3.5rem] sm:text-[5rem] leading-none">📢</span>
+              <h2 className="text-[2.8rem] sm:text-[4rem] font-black tracking-tight leading-none">
                 GRAND OPEN
               </h2>
             </div>
 
             {/* 점선 */}
             <div
-              className="mx-auto my-6 sm:my-8"
+              className="mx-auto my-8 sm:my-10"
               style={{
                 width: "90%",
                 height: "3px",
@@ -77,15 +77,15 @@ export default function PopupNotice() {
             />
 
             {/* 설명 텍스트 */}
-            <p className="text-[1.25rem] sm:text-[1.5rem] leading-relaxed mb-1 tracking-tight">
+            <p className="text-[1.3rem] sm:text-[1.6rem] leading-relaxed mb-1 tracking-tight">
               젠틀맥스프로플러스 <span className="font-bold underline underline-offset-4 decoration-2">정품</span> 장비 보유
             </p>
-            <p className="text-[1.25rem] sm:text-[1.5rem] leading-relaxed mb-10 tracking-tight">
+            <p className="text-[1.3rem] sm:text-[1.6rem] leading-relaxed mb-12 sm:mb-16 tracking-tight">
               남/여 제모공간 분리 !
             </p>
 
             {/* 층별 안내 */}
-            <div className="flex flex-col gap-8 items-center mb-10">
+            <div className="flex flex-col gap-10 sm:gap-14 items-center mb-12 sm:mb-16">
               {/* 11층 여성 */}
               <div className="flex items-center gap-8">
                 <span className="text-[1.8rem] sm:text-[2.2rem] font-bold min-w-[4.5rem] text-right">11층</span>
@@ -115,11 +115,11 @@ export default function PopupNotice() {
             </div>
 
             {/* 여백 */}
-            <div className="h-6 sm:h-10" />
+            <div className="h-10 sm:h-16" />
           </div>
 
           {/* @molessclinic */}
-          <div className="flex items-center gap-4 px-10 pb-10 sm:px-16">
+          <div className="flex items-center gap-4 px-10 pb-12 sm:px-16 sm:pb-14">
             <div className="flex-1 h-[2px] bg-[#222]" />
             <a
               href="https://www.instagram.com/molessclinic/"
