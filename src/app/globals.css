@@ -31,7 +31,7 @@
   --logo-height-mobile: 50px;
   --max-width: 1425px;
   --max-width-wide: 2000px;
-  --container-padding: 70px;
+  --container-padding: clamp(20px, 5vw, 70px);
   --col-gap: 50px;
 
   /* ── 타이포그래피 ── */
