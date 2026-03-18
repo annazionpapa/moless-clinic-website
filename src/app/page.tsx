@@ -49,7 +49,7 @@ const FOR_YOU_CARDS_TOP = [
   {
     image: "/images/original/gentlemax-handpiece.jpg",
     title: "맞춤 제모",
-    desc: "남/여의사가 개인별 맞춤 시술 진행",
+    desc: "남/여의사가 개인별 맞춤 시술 1:1로 진행",
   },
 ];
 
@@ -62,7 +62,7 @@ const FOR_YOU_CARDS_BOTTOM = [
   {
     image: "/images/original/clinic-interior-2.jpg",
     title: "프라이버시 존중",
-    desc: "남/여 제모공간 분리\n브라질리언 1인 대기실\n남/여의사",
+    desc: "남/여 제모공간 분리 별도 대기실\n브라질리언 1인 대기실\n남/여의사",
   },
   {
     image: "/images/original/slide-002.png",
@@ -76,30 +76,30 @@ const ABOUT_CARDS = [
   {
     image: "/images/original/male-face.jpg",
     title: "얼굴제모",
-    subtitle: "Face Hair Removal",
+    sub: "시술안내 바로가기",
     href: "/treatment/face",
   },
   {
     image: "/images/original/female-body.jpg",
     title: "바디제모",
-    subtitle: "Body Hair Removal",
+    sub: "시술안내 바로가기",
     href: "/treatment/body",
   },
   {
     image: "/images/original/equipment-slide.png",
     title: "젠틀맥스프로플러스",
-    subtitle: "GentleMax Pro Plus",
+    sub: "장비소개 바로가기",
     href: "/equipment/gentlemax",
   },
   {
     image: "/images/original/slide-001.png",
     title: "아포지엘리트플러스",
-    subtitle: "Apogee Elite Plus",
+    sub: "장비소개 바로가기",
     href: "/equipment/apogee",
   },
 ];
 
-/* ═══ 인테리어 갤러리 이미지 ═══ */
+/* ═══ 인테리어 갤러리 ═══ */
 const INTERIOR_IMAGES = [
   "/images/original/clinic-interior-1.jpg",
   "/images/original/clinic-interior-2.jpg",
@@ -107,26 +107,16 @@ const INTERIOR_IMAGES = [
 ];
 
 /* ═══════════════════════════════════════
-   메인 페이지 — 디자인 토큰 기반
+   메인 페이지
    ═══════════════════════════════════════ */
 export default function HomePage() {
   const stat1 = useCountUp(9999);
   const stat2 = useCountUp(100);
-  const [currentSlide, setCurrentSlide] = useState(0);
-
-  /* 인테리어 슬라이더 자동 전환 */
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % INTERIOR_IMAGES.length);
-    }, 4000);
-    return () => clearInterval(timer);
-  }, []);
 
   return (
     <>
       {/* ══════════════════════════════════════════
           섹션 1: 히어로 — 풀스크린
-          디자인 토큰: Cormorant serif H1, 투명 오버레이
       ══════════════════════════════════════════ */}
       <section className="relative h-screen flex flex-col items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
@@ -140,10 +130,10 @@ export default function HomePage() {
         </div>
         <div className="absolute inset-0 bg-black/20" />
 
+        {/* 타이틀 그룹 — 화면 중앙 */}
         <div className="relative z-10 text-center text-white px-6">
-          {/* 메인 타이틀 — 디자인 토큰: Cormorant serif, light weight */}
           <h1
-            className="leading-[1] mb-8"
+            className="leading-[1] mb-10"
             style={{
               fontFamily: "var(--font-italic)",
               fontSize: "clamp(3rem, 8vw, 6.5rem)",
@@ -155,9 +145,8 @@ export default function HomePage() {
             MOLESS CLINIC
           </h1>
 
-          {/* 서브타이틀 — 디자인 토큰: H5 스타일, 0.2em spacing */}
           <p
-            className="text-white/80 mb-14"
+            className="text-white/80"
             style={{
               fontFamily: "var(--font-body)",
               fontSize: "clamp(0.8rem, 1.5vw, 1rem)",
@@ -167,14 +156,16 @@ export default function HomePage() {
           >
             毛 + LESS, 강남역 레이저제모
           </p>
+        </div>
 
-          {/* CTA 버튼 — 디자인 토큰: rounded 200px, border-white/50 */}
-          <div className="flex flex-col items-center gap-3">
+        {/* CTA 버튼 — 화면 하단 쪽에 분리 배치 */}
+        <div className="absolute bottom-[15vh] left-1/2 -translate-x-1/2 z-10 w-full px-6">
+          <div className="flex flex-col items-center gap-4">
             <Link
               href="/pricing/male"
-              className="group flex items-center gap-3 justify-center transition-all"
+              className="group flex items-center gap-3 justify-center hover:bg-white/10 transition-all"
               style={{
-                padding: "13px 40px",
+                padding: "14px 44px",
                 borderRadius: "200px",
                 border: "1px solid rgba(255,255,255,0.5)",
                 fontFamily: "var(--font-label)",
@@ -182,15 +173,8 @@ export default function HomePage() {
                 fontWeight: 500,
                 letterSpacing: "0.12em",
                 color: "var(--color-white)",
-                minWidth: "280px",
+                minWidth: "300px",
                 transitionDuration: "var(--duration-normal)",
-                transitionTimingFunction: "var(--ease-waypoint)",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.1)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = "transparent";
               }}
             >
               <span className="w-5 h-px bg-white/60" />
@@ -198,9 +182,9 @@ export default function HomePage() {
             </Link>
             <Link
               href="/pricing/female"
-              className="group flex items-center gap-3 justify-center transition-all"
+              className="group flex items-center gap-3 justify-center hover:bg-white/10 transition-all"
               style={{
-                padding: "13px 40px",
+                padding: "14px 44px",
                 borderRadius: "200px",
                 border: "1px solid rgba(255,255,255,0.5)",
                 fontFamily: "var(--font-label)",
@@ -208,15 +192,8 @@ export default function HomePage() {
                 fontWeight: 500,
                 letterSpacing: "0.12em",
                 color: "var(--color-white)",
-                minWidth: "280px",
+                minWidth: "300px",
                 transitionDuration: "var(--duration-normal)",
-                transitionTimingFunction: "var(--ease-waypoint)",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.1)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = "transparent";
               }}
             >
               <span className="w-5 h-px bg-white/60" />
@@ -225,7 +202,7 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* 스크롤 인디케이터 */}
+        {/* 스크롤 인디케이터 — 버튼 아래 */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
           <Image
             src="/images/original/scroll-down.png"
@@ -238,30 +215,30 @@ export default function HomePage() {
       </section>
 
       {/* ══════════════════════════════════════════
-          섹션 2: 제모를 위한 공간 + 걸어가는 사람 + 카운터
-          디자인 토큰: 흰 배경, 센터 텍스트
+          섹션 2: 소개
+          본사: 제목 → 넉넉한 여백 → 걸어가는 사람 → 여백 → 설명 → 여백 → 카운터
       ══════════════════════════════════════════ */}
       <section className="bg-white">
-        {/* 상단 타이틀 */}
-        <div className="pt-32 md:pt-44 pb-8 text-center px-6">
+        {/* 타이틀 — 넉넉한 상단 여백 */}
+        <div className="pt-36 md:pt-52 pb-16 md:pb-20 text-center px-6">
           <h2
-            className="font-normal fade-up"
+            className="font-bold fade-up"
             data-scroll-animate
             style={{
               fontFamily: "var(--font-body)",
-              fontSize: "clamp(1.2rem, 2.5vw, 1.6rem)",
-              letterSpacing: "0.05em",
-              color: "var(--color-meta)",
+              fontSize: "clamp(1.5rem, 3vw, 2.2rem)",
+              letterSpacing: "-0.02em",
+              color: "var(--color-black)",
             }}
           >
-            제모를 위한 공간, 모리스의원
+            제모를 위한 공간, 모리스의원 강남
           </h2>
         </div>
 
-        {/* 걸어가는 사람 */}
-        <div className="flex justify-center py-20 md:py-32">
+        {/* 걸어가는 사람 — 상하 여백 넉넉 */}
+        <div className="flex justify-center py-16 md:py-24">
           <div
-            className="relative w-[120px] md:w-[160px] aspect-[1/2] fade-up"
+            className="relative w-[80px] md:w-[110px] aspect-[1/2.2] fade-up"
             data-scroll-animate
           >
             <Image
@@ -273,9 +250,28 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* 카운터 — 본사 스타일: 우측 정렬 */}
+        {/* 설명 텍스트 — 사람과 카운터 사이 충분한 여백 */}
+        <div className="text-center px-6 pb-20 md:pb-28 space-y-3 fade-up" data-scroll-animate>
+          <p style={{ fontSize: "clamp(0.9rem, 1.4vw, 1rem)", color: "var(--color-sub)", lineHeight: 1.8 }}>
+            <span style={{ color: "#c00", fontWeight: 700 }}>남성제모(9F)</span>,{" "}
+            <span style={{ color: "#c00", fontWeight: 700 }}>여성제모(11F)</span>{" "}
+            로 <span style={{ fontWeight: 700 }}>&quot;분리된 공간&quot;</span>
+          </p>
+          <p style={{ fontSize: "clamp(0.9rem, 1.4vw, 1rem)", color: "var(--color-sub)", lineHeight: 1.8 }}>
+            젠틀맥스프로플러스 <span className="font-bold underline">4대</span>, 아포지엘리트플러스{" "}
+            <span className="font-bold underline">2대</span>
+          </p>
+          <p style={{ fontSize: "clamp(0.9rem, 1.4vw, 1rem)", color: "var(--color-sub)", lineHeight: 1.8 }}>
+            1인 대기실, 1인 시술실 보유
+          </p>
+          <p style={{ fontSize: "clamp(0.9rem, 1.4vw, 1rem)", color: "#c00", fontWeight: 700, lineHeight: 1.8 }}>
+            남/여 의료진 맞춤시술
+          </p>
+        </div>
+
+        {/* 카운터 — 설명과 분리, 넉넉한 하단 여백 */}
         <div
-          className="flex justify-end gap-12 md:gap-20 pb-24 md:pb-32"
+          className="flex justify-end gap-16 md:gap-24 pb-28 md:pb-40"
           style={{ paddingInline: "var(--container-padding)" }}
         >
           <div ref={stat1.ref} className="text-right fade-up" data-scroll-animate>
@@ -291,7 +287,7 @@ export default function HomePage() {
             >
               {stat1.count.toLocaleString()}+
             </p>
-            <p className="mt-2" style={{ fontSize: "12px", color: "var(--color-meta)", letterSpacing: "0.1em" }}>
+            <p className="mt-3" style={{ fontSize: "13px", color: "var(--color-meta)", letterSpacing: "0.1em" }}>
               누적 고객수
             </p>
           </div>
@@ -308,7 +304,7 @@ export default function HomePage() {
             >
               {stat2.count}%
             </p>
-            <p className="mt-2" style={{ fontSize: "12px", color: "var(--color-meta)", letterSpacing: "0.1em" }}>
+            <p className="mt-3" style={{ fontSize: "13px", color: "var(--color-meta)", letterSpacing: "0.1em" }}>
               정품정량
             </p>
           </div>
@@ -316,13 +312,15 @@ export default function HomePage() {
       </section>
 
       {/* ══════════════════════════════════════════
-          섹션 3: For You 카드 그리드
-          디자인 토큰: 크림색 배경, Cormorant 이탤릭 제목
+          섹션 3: For You
       ══════════════════════════════════════════ */}
-      <section className="py-16 md:py-24 px-5 md:px-10 lg:px-16" style={{ backgroundColor: "#FFF8F0" }}>
+      <section
+        className="py-20 md:py-32"
+        style={{ backgroundColor: "#FFF8F0", paddingInline: "var(--container-padding)" }}
+      >
         <div style={{ maxWidth: "var(--max-width)", marginInline: "auto" }}>
           <h2
-            className="italic mb-8 md:mb-12 fade-up"
+            className="italic mb-12 md:mb-16 fade-up"
             data-scroll-animate
             style={{
               fontFamily: "var(--font-italic)",
@@ -334,12 +332,12 @@ export default function HomePage() {
             For you
           </h2>
 
-          {/* 상단 2열 대형 카드 */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+          {/* 상단 2열 */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
             {FOR_YOU_CARDS_TOP.map((card, i) => (
               <div
                 key={card.title}
-                className="relative overflow-hidden rounded-xl group fade-up"
+                className="relative overflow-hidden rounded-lg group fade-up bg-black"
                 data-scroll-animate
                 style={{ transitionDelay: `${i * 100}ms`, aspectRatio: "16/10" }}
               >
@@ -347,17 +345,16 @@ export default function HomePage() {
                   src={card.image}
                   alt={card.title}
                   fill
-                  className="object-cover transition-transform group-hover:scale-105"
+                  className="object-cover opacity-70 transition-transform group-hover:scale-105"
                   style={{ transitionDuration: "var(--duration-slow)" }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-                <div className="absolute bottom-0 left-0 p-5 md:p-7 text-white z-10">
+                <div className="absolute bottom-0 left-0 p-6 md:p-8 text-white z-10">
                   <h3
                     style={{
                       fontFamily: "var(--font-body)",
-                      fontSize: "clamp(1rem, 1.5vw, 1.15rem)",
+                      fontSize: "clamp(0.95rem, 1.5vw, 1.15rem)",
                       fontWeight: 700,
-                      marginBottom: "4px",
+                      marginBottom: "6px",
                     }}
                   >
                     {card.title}
@@ -365,9 +362,9 @@ export default function HomePage() {
                   <p
                     className="whitespace-pre-line"
                     style={{
-                      fontSize: "clamp(0.75rem, 1vw, 0.875rem)",
-                      color: "rgba(255,255,255,0.8)",
-                      lineHeight: 1.6,
+                      fontSize: "clamp(0.75rem, 1vw, 0.85rem)",
+                      color: "rgba(255,255,255,0.7)",
+                      lineHeight: 1.7,
                     }}
                   >
                     {card.desc}
@@ -377,12 +374,12 @@ export default function HomePage() {
             ))}
           </div>
 
-          {/* 하단 3열 소형 카드 */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {/* 하단 3열 */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
             {FOR_YOU_CARDS_BOTTOM.map((card, i) => (
               <div
                 key={card.title}
-                className="relative overflow-hidden rounded-xl group fade-up"
+                className="relative overflow-hidden rounded-lg group fade-up bg-black"
                 data-scroll-animate
                 style={{ transitionDelay: `${(i + 2) * 100}ms`, aspectRatio: "4/3" }}
               >
@@ -390,15 +387,14 @@ export default function HomePage() {
                   src={card.image}
                   alt={card.title}
                   fill
-                  className="object-cover transition-transform group-hover:scale-105"
+                  className="object-cover opacity-60 transition-transform group-hover:scale-105"
                   style={{ transitionDuration: "var(--duration-slow)" }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-                <div className="absolute bottom-0 left-0 p-5 text-white z-10">
+                <div className="absolute bottom-0 left-0 p-5 md:p-6 text-white z-10">
                   <h3
                     style={{
                       fontFamily: "var(--font-body)",
-                      fontSize: "clamp(0.875rem, 1.2vw, 1rem)",
+                      fontSize: "clamp(0.85rem, 1.2vw, 1rem)",
                       fontWeight: 700,
                       marginBottom: "4px",
                     }}
@@ -409,8 +405,8 @@ export default function HomePage() {
                     className="whitespace-pre-line"
                     style={{
                       fontSize: "clamp(0.7rem, 0.9vw, 0.8rem)",
-                      color: "rgba(255,255,255,0.8)",
-                      lineHeight: 1.6,
+                      color: "rgba(255,255,255,0.65)",
+                      lineHeight: 1.7,
                     }}
                   >
                     {card.desc}
@@ -423,54 +419,53 @@ export default function HomePage() {
       </section>
 
       {/* ══════════════════════════════════════════
-          섹션 4: 인테리어 갤러리/캐러셀
-          디자인 토큰: 사진 갤러리, 슬라이드
+          섹션 4: Interior
       ══════════════════════════════════════════ */}
-      <section className="relative bg-black overflow-hidden" style={{ height: "80vh" }}>
-        {INTERIOR_IMAGES.map((src, i) => (
-          <div
-            key={src}
-            className="absolute inset-0 transition-opacity"
+      <section
+        className="py-20 md:py-32"
+        style={{ backgroundColor: "#FFF8F0", paddingInline: "var(--container-padding)" }}
+      >
+        <div style={{ maxWidth: "var(--max-width)", marginInline: "auto" }}>
+          <h2
+            className="italic mb-10 md:mb-14 fade-up"
+            data-scroll-animate
             style={{
-              opacity: currentSlide === i ? 1 : 0,
-              transitionDuration: "1000ms",
-              transitionTimingFunction: "var(--ease-waypoint)",
+              fontFamily: "var(--font-italic)",
+              fontSize: "clamp(2.5rem, 5vw, 4rem)",
+              fontWeight: 400,
+              letterSpacing: "-0.01em",
             }}
           >
-            <Image
-              src={src}
-              alt={`clinic interior ${i + 1}`}
-              fill
-              className="object-cover"
-            />
-          </div>
-        ))}
-        <div className="absolute inset-0 bg-black/30" />
+            Interior
+          </h2>
 
-        {/* 슬라이드 인디케이터 */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex gap-2">
-          {INTERIOR_IMAGES.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setCurrentSlide(i)}
-              className="w-2 h-2 rounded-full transition-all cursor-pointer"
-              style={{
-                backgroundColor: currentSlide === i ? "var(--color-white)" : "rgba(255,255,255,0.4)",
-                transform: currentSlide === i ? "scale(1.3)" : "scale(1)",
-                transitionDuration: "var(--duration-normal)",
-              }}
-              aria-label={`슬라이드 ${i + 1}`}
-            />
-          ))}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 fade-up" data-scroll-animate>
+            {INTERIOR_IMAGES.map((src, i) => (
+              <div
+                key={src}
+                className={`relative overflow-hidden rounded-lg ${i === 2 ? "md:col-span-2" : ""}`}
+                style={{ aspectRatio: i === 2 ? "32/10" : "16/10" }}
+              >
+                <Image
+                  src={src}
+                  alt={`clinic interior ${i + 1}`}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* ══════════════════════════════════════════
-          섹션 5: About Us — 시술 안내
-          디자인 토큰: 4개 카드, fancy box 스타일
+          섹션 5: About Us
       ══════════════════════════════════════════ */}
-      <section className="bg-white py-24 md:py-36">
-        <div style={{ maxWidth: "var(--max-width)", marginInline: "auto", paddingInline: "var(--container-padding)" }}>
+      <section
+        className="py-28 md:py-40"
+        style={{ backgroundColor: "#FFF8F0", paddingInline: "var(--container-padding)" }}
+      >
+        <div style={{ maxWidth: "var(--max-width)", marginInline: "auto" }}>
           <h2
             className="italic mb-12 md:mb-16 fade-up"
             data-scroll-animate
@@ -484,7 +479,7 @@ export default function HomePage() {
             About us
           </h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
             {ABOUT_CARDS.map((card, i) => (
               <Link
                 key={card.title}
@@ -501,23 +496,29 @@ export default function HomePage() {
                     className="object-cover transition-transform group-hover:scale-105"
                     style={{ transitionDuration: "var(--duration-slow)" }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                  <div className="absolute bottom-0 left-0 p-5 text-white z-10">
+                    <h3
+                      style={{
+                        fontFamily: "var(--font-body)",
+                        fontSize: "clamp(0.85rem, 1.3vw, 1.05rem)",
+                        fontWeight: 600,
+                        marginBottom: "4px",
+                      }}
+                    >
+                      {card.title}
+                    </h3>
+                    <p
+                      className="link-underline"
+                      style={{
+                        fontSize: "clamp(0.7rem, 0.9vw, 0.8rem)",
+                        color: "rgba(255,255,255,0.7)",
+                      }}
+                    >
+                      {card.sub}
+                    </p>
+                  </div>
                 </div>
-                <h3
-                  className="link-underline"
-                  style={{
-                    fontFamily: "var(--font-body)",
-                    fontSize: "18px",
-                    fontWeight: 600,
-                    letterSpacing: "-0.02em",
-                    marginBottom: "4px",
-                  }}
-                >
-                  {card.title}
-                </h3>
-                <p style={{ fontSize: "13px", color: "var(--color-meta)", letterSpacing: "0.02em" }}>
-                  {card.subtitle}
-                </p>
               </Link>
             ))}
           </div>
@@ -525,23 +526,21 @@ export default function HomePage() {
       </section>
 
       {/* ══════════════════════════════════════════
-          섹션 6: 스크롤 텍스트 마퀴
-          디자인 토큰: "Moless Clinic" 반복 스크롤
+          섹션 6: 스크롤 마퀴
       ══════════════════════════════════════════ */}
-      <section className="overflow-hidden py-12 md:py-16 bg-white border-y border-gray-100">
+      <section className="overflow-hidden py-10 md:py-16 bg-white">
         <div className="animate-scroll-left whitespace-nowrap">
-          {Array.from({ length: 8 }).map((_, i) => (
+          {Array.from({ length: 6 }).map((_, i) => (
             <span
               key={i}
-              className="inline-block mx-8"
+              className="inline-block mx-6 md:mx-10"
               style={{
                 fontFamily: "var(--font-italic)",
-                fontSize: "clamp(2rem, 5vw, 4.5rem)",
+                fontSize: "clamp(4rem, 12vw, 10rem)",
                 fontWeight: 400,
                 fontStyle: "italic",
-                letterSpacing: "-0.01em",
-                color: i % 2 === 0 ? "var(--color-black)" : "var(--color-meta)",
-                opacity: i % 2 === 0 ? 1 : 0.3,
+                letterSpacing: "-0.02em",
+                color: "var(--color-black)",
               }}
             >
               Moless Clinic
@@ -552,63 +551,60 @@ export default function HomePage() {
 
       {/* ══════════════════════════════════════════
           섹션 7: 오시는 길 + 진료시간
-          디자인 토큰: 2컬럼, 좌측 지도 + 우측 정보
       ══════════════════════════════════════════ */}
-      <section className="bg-white py-24 md:py-36">
+      <section className="bg-white py-28 md:py-40">
         <div style={{ maxWidth: "1300px", marginInline: "auto", paddingInline: "var(--container-padding)" }}>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
             {/* 지도 */}
             <div className="fade-up" data-scroll-animate>
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3165.354!2d127.028!3d37.498!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzfCsDI5JzUyLjgiTiAxMjfCsDAxJzQxLjIiRQ!5e0!3m2!1sko!2skr!4v1"
-                width="100%"
-                height="450"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="w-full"
-              />
+              <div className="relative w-full" style={{ aspectRatio: "4/3" }}>
+                <Image
+                  src="/images/original/gangnam-map.jpg"
+                  alt="모리스의원 위치"
+                  fill
+                  className="object-cover rounded-sm"
+                />
+              </div>
             </div>
 
             {/* 정보 */}
             <div className="fade-up delay-200" data-scroll-animate>
               <h2
-                className="mb-6"
+                className="mb-8"
                 style={{
                   fontFamily: "var(--font-body)",
-                  fontSize: "clamp(1.5rem, 2vw, 1.7rem)",
+                  fontSize: "clamp(1.3rem, 2vw, 1.5rem)",
                   fontWeight: 700,
                   letterSpacing: "-0.02em",
                 }}
               >
                 오시는 길
               </h2>
-              <div className="space-y-1.5 mb-10" style={{ fontSize: "15px", color: "#333", lineHeight: 1.7 }}>
+              <div className="space-y-2 mb-14" style={{ fontSize: "15px", color: "#333", lineHeight: 1.9 }}>
                 <p>서울특별시 강남대로378, 준빌딩</p>
                 <p className="font-bold">9층 &nbsp;남성제모</p>
                 <p className="font-bold">11층 여성제모 &amp; 상담</p>
-                <p style={{ color: "var(--color-meta)" }}>(강남역 2, 3번출구 도보1분)</p>
+                <p style={{ color: "var(--color-meta)", fontSize: "13px" }}>(강남역 2, 3번출구 도보1분)</p>
               </div>
 
               <h3
-                className="mb-5"
+                className="mb-6"
                 style={{
                   fontFamily: "var(--font-body)",
-                  fontSize: "clamp(1.5rem, 2vw, 1.7rem)",
+                  fontSize: "clamp(1.3rem, 2vw, 1.5rem)",
                   fontWeight: 700,
                   letterSpacing: "-0.02em",
                 }}
               >
                 진료 시간
               </h3>
-              <div className="space-y-2" style={{ fontSize: "15px", color: "#333" }}>
-                <div className="flex gap-8">
-                  <span className="font-bold min-w-[3rem]">평일</span>
+              <div className="space-y-3" style={{ fontSize: "15px", color: "#333" }}>
+                <div className="flex gap-10">
+                  <span className="font-bold min-w-[3.5rem]">평일</span>
                   <span>11:00 – 21:00 &nbsp;&nbsp;(점심시간 14:00~15:00)</span>
                 </div>
-                <div className="flex gap-8">
-                  <span className="font-bold min-w-[3rem]">주말</span>
+                <div className="flex gap-10">
+                  <span className="font-bold min-w-[3.5rem]">주말</span>
                   <span>10:00 – 17:30</span>
                 </div>
               </div>
@@ -618,11 +614,10 @@ export default function HomePage() {
       </section>
 
       {/* ══════════════════════════════════════════
-          섹션 8: 상담 안내 — CTA 섹션
-          디자인 토큰: #ECEBE9 배경, #4B4F52 텍스트
+          섹션 8: 상담 CTA
       ══════════════════════════════════════════ */}
       <section
-        className="py-20 md:py-28"
+        className="py-24 md:py-36"
         style={{ backgroundColor: "var(--color-cta-bg)" }}
       >
         <div
@@ -631,7 +626,7 @@ export default function HomePage() {
           style={{ maxWidth: "var(--max-width)", marginInline: "auto", paddingInline: "var(--container-padding)" }}
         >
           <h2
-            className="italic mb-6"
+            className="italic mb-8"
             style={{
               fontFamily: "var(--font-italic)",
               fontSize: "clamp(2rem, 4vw, 3.5rem)",
@@ -643,7 +638,7 @@ export default function HomePage() {
             Get in touch
           </h2>
           <p
-            className="mb-10"
+            className="mb-12"
             style={{
               fontFamily: "var(--font-body)",
               fontSize: "clamp(0.9rem, 1.5vw, 1.05rem)",
@@ -682,10 +677,9 @@ export default function HomePage() {
             </Link>
           </div>
 
-          {/* 전화번호 */}
           <a
             href="tel:025556231"
-            className="inline-block mt-10 link-underline"
+            className="inline-block mt-14 link-underline"
             style={{
               fontFamily: "var(--font-heading)",
               fontSize: "clamp(1.5rem, 3vw, 2.2rem)",
@@ -700,7 +694,7 @@ export default function HomePage() {
       </section>
 
       {/* ══════════════════════════════════════════
-          섹션 9: 밤하늘 — 풀스크린 이미지
+          섹션 9: 밤하늘 — 풀스크린
       ══════════════════════════════════════════ */}
       <section className="relative h-screen overflow-hidden">
         <Image
