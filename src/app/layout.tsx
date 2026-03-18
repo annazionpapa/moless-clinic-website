@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ScrollAnimator from "@/components/ScrollAnimator";
+import PopupNotice from "@/components/PopupNotice";
 
 /* ─── 메타데이터 ─── */
 export const metadata: Metadata = {
@@ -63,6 +64,9 @@ export default function RootLayout({
 
         {/* 스크롤 진입 애니메이션 처리 */}
         <ScrollAnimator />
+
+        {/* 팝업 공지 */}
+        <PopupNotice />
       </body>
     </html>
   );
